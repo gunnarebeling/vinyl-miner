@@ -1,24 +1,23 @@
-import {Routes, Route} from "react-router-dom"
+import { Route, Routes } from "react-router-dom"
+import {Login} from './components/auth/Login'
+import {Register} from './components/auth/Register'
 import { Authorized } from "./views/Authorized"
-import { Register } from "./components/auth/Register"
-import { Login } from "./components/auth/login"
-import { ApplicationViews } from "./views/ApplicationViews"
+import {ApplicationViews} from './views/ApplicationViews'
 
 export const App = () => {
   return (
     <Routes>
-    <Route path="/login" element={<Login/>}/>
-    <Route path="/register" element={<Register/>}/>
-    <Route 
-      path="*" 
-      element={
-        <Authorized>
-            <ApplicationViews/>
-        </Authorized>
-        }
-      />
-    
-  </Routes>
+        <Route path="/login" element={<Login/>}/>
+        <Route path='/register' element={<Register/>}/>
+        <Route
+          path="*"
+          element={
+            <Authorized>
+              <ApplicationViews/>
+            </Authorized>    
+          }
+        />
+    </Routes>
+
   )
 }
-  

@@ -1,25 +1,23 @@
-// eslint-disable-next-line no-unused-vars
-import React, { useState } from "react"
+import { useState } from "react"
 import { Link } from "react-router-dom"
 import { useNavigate } from "react-router-dom"
-import "./Login.css"
+// import "./Login.css"
 import { getUserByEmail } from "../../services/userService"
 
 export const Login = () => {
-  const [email, set] = useState("hpassfield7@netvibes.com")
+  const [email, set] = useState("")
   const navigate = useNavigate()
 
   const handleLogin = (e) => {
     e.preventDefault()
 
-    getUserByEmail(email).then((foundUsers) => {
+    return getUserByEmail(email).then((foundUsers) => {
       if (foundUsers.length === 1) {
         const user = foundUsers[0]
         localStorage.setItem(
-          "honey_user",
+          "vinyl_user",
           JSON.stringify({
             id: user.id,
-            isStaff: user.isStaff,
           })
         )
 
@@ -31,36 +29,35 @@ export const Login = () => {
   }
 
   return (
-    <main className="container-login">
+    <main className="auth-container">
       <section>
-        <form className="form-login" onSubmit={handleLogin}>
-          <h1>Honey Rae Repairs</h1>
+        <form className="auth-form" onSubmit={handleLogin}>
+          <h1 className="header">Vinyl Miner</h1>
           <h2>Please sign in</h2>
-          <fieldset>
-            <div className="form-group">
+          <fieldset className="auth-fieldset">
+            <div>
               <input
                 type="email"
                 value={email}
+                className="auth-form-input"
                 onChange={(evt) => set(evt.target.value)}
-                className="form-control"
                 placeholder="Email address"
                 required
                 autoFocus
               />
             </div>
           </fieldset>
-          <fieldset>
-            <div className="form-group">
-              <button className="login-btn btn-info" type="submit">
-                Sign in
-              </button>
+          <fieldset className="auth-fieldset">
+            <div>
+              <button type="submit">Sign in</button>
             </div>
           </fieldset>
         </form>
       </section>
-      <section>
+      <section className="register-link">
         <Link to="/register">Not a member yet?</Link>
       </section>
     </main>
   )
 }
+

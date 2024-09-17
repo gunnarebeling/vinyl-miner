@@ -1,0 +1,29 @@
+import { Link, useNavigate } from "react-router-dom"
+
+export const NavBar = () => {
+    const navigate = useNavigate()
+    return (
+        <ul className="nav bg-dark">
+            <li className="nav-item">
+                <Link className="nav-link" to='/' >All Vinyl</Link>
+            </li>
+           
+            {localStorage.getItem("vinyl_user") ? (
+                <li className="nav-item ms-auto">
+                    <Link
+                    className="nav-link"
+                    to=""
+                    onClick={() => {
+                        localStorage.removeItem("vinyl_user")
+                        navigate("/login", { replace: true })
+                    }}
+                    >
+                    Logout
+                    </Link>
+                </li>
+                ) : (
+                ""
+                )}
+        </ul>
+    )
+}
