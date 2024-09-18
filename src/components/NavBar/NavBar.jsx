@@ -1,11 +1,14 @@
 import { Link, useNavigate } from "react-router-dom"
 
-export const NavBar = () => {
+export const NavBar = ({currentUser}) => {
     const navigate = useNavigate()
     return (
         <ul className="nav bg-dark">
             <li className="nav-item">
                 <Link className="nav-link" to='/' >All Vinyl</Link>
+            </li>
+            <li className="nav-item">
+                <Link className="nav-link" to={`/collection/${currentUser}`} >My Collection</Link>
             </li>
            
             {localStorage.getItem("vinyl_user") ? (
