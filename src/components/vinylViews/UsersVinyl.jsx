@@ -1,11 +1,13 @@
+/* eslint-disable react/no-unescaped-entities */
 import { useEffect, useState } from "react"
-import { useParams } from "react-router-dom"
+import { useNavigate, useParams } from "react-router-dom"
 import { getVinylByUser } from "../../services/vinylServices"
 import { Vinyl } from "./Vinyl"
 
 export const UsersVinyl = ({currentUser}) => {
     const [usersVinyl, setUsersVinyl] = useState([])
     const {userId} = useParams()
+    const navigate = useNavigate()
     useEffect(() => {
         getVinylByUser(userId).then(res =>{
             setUsersVinyl(res)
@@ -13,10 +15,15 @@ export const UsersVinyl = ({currentUser}) => {
 
         )
     }, [userId])
+    const handleAddToCollection = (event) => {
+        event.preventDefault()
+        navigate('/NewVinyl')
+
+    }
     return (
         <>
-            <div className="header text-center m-3">
-                {parseInt(userId) === currentUser ? <header>My Collection</header> : <header>{usersVinyl[0]?.user.fullName} Collection</header>}
+            <div className="header text-center d-flex justify-content-between m-3">
+                {parseInt(userId) === currentUser ? (<><header className="align-self-center mx-auto">My Collection</header> <button className="btn-primary btn" onClick={handleAddToCollection}>+</button></>) : <header>{usersVinyl[0]?.user.fullName}'s Collection</header>}
             </div>
             <div className="collection-container border p-2 row">
                 {usersVinyl?.map(vinyl => (

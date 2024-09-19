@@ -10,6 +10,9 @@ export const NavBar = ({currentUser}) => {
             <li className="nav-item">
                 <Link className="nav-link" to={`/collection/${currentUser}`} >My Collection</Link>
             </li>
+            <li className="nav-item">
+                <Link className="nav-link" to={`/profile/${currentUser}`} >My Profile</Link>
+            </li>
            
             {localStorage.getItem("vinyl_user") ? (
                 <li className="nav-item ms-auto">

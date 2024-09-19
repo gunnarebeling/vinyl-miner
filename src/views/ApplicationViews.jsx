@@ -3,6 +3,8 @@ import { NavBar } from "../components/NavBar/NavBar"
 import { AllVinyl } from "../components/vinylViews/AllVinyl"
 import { UsersVinyl } from "../components/vinylViews/UsersVinyl"
 import { useEffect, useState } from "react"
+import { Profile } from "../components/profile/Profile"
+import { NewVinylForm } from "../components/Forms/NewVinylForm"
 
 export const ApplicationViews = () => {
     const [currentUser, setCurrentUser]= useState(0)
@@ -25,7 +27,8 @@ export const ApplicationViews = () => {
                 }>
                     <Route index element={<AllVinyl/>}/>
                     <Route path="/collection/:userId" element={<UsersVinyl currentUser={currentUser}/>}/>
-                    
+                    <Route path="/profile/:userId" element={<Profile currentUser={currentUser}/>}/>
+                    <Route path="NewVinyl" element={<NewVinylForm/>}/>
 
 
             </Route>

@@ -1,5 +1,3 @@
-
-.vinyl-container{
-    min-height: 100%;
-    margin: 10px
+.card {
+    height: 100%;
 }

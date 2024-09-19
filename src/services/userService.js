@@ -13,3 +13,7 @@ export const createUser = (user) => {
     body: JSON.stringify(user),
   }).then((res) => res.json())
 }
+
+export const getUserById = (userId) => {
+  return fetch(`http://localhost:8088/users?id=${userId}&_embed=vinyls`).then(res => res.json())
+}

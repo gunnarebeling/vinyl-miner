@@ -23,7 +23,7 @@ export const AllVinyl = () => {
     return (
         <>
             <div className="header-container m-3">
-                <header className="display-6 text-center">New Vinyl</header>
+                <header className="display-6 text-center">All Vinyl</header>
             </div>
             <FilterBar setFilteredVinyl={setFilteredVinyl} allVinyl={allVinyl}/>
             <div className="vinyls-container row border mx-2">
