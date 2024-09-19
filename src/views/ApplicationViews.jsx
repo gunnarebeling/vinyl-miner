@@ -5,6 +5,7 @@ import { UsersVinyl } from "../components/vinylViews/UsersVinyl"
 import { useEffect, useState } from "react"
 import { Profile } from "../components/profile/Profile"
 import { NewVinylForm } from "../components/Forms/NewVinylForm"
+import { EditProfile } from "../components/Forms/EditProfile"
 
 export const ApplicationViews = () => {
     const [currentUser, setCurrentUser]= useState(0)
@@ -28,7 +29,8 @@ export const ApplicationViews = () => {
                     <Route index element={<AllVinyl/>}/>
                     <Route path="/collection/:userId" element={<UsersVinyl currentUser={currentUser}/>}/>
                     <Route path="/profile/:userId" element={<Profile currentUser={currentUser}/>}/>
-                    <Route path="NewVinyl" element={<NewVinylForm/>}/>
+                    <Route path="NewVinyl" element={<NewVinylForm currentUser={currentUser}/>}/>
+                    <Route path="editprofile" element={<EditProfile currentUser={currentUser}/>}/>
 
 
             </Route>

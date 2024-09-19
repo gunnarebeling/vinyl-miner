@@ -39,7 +39,10 @@ export const Profile = ({currentUser}) => {
                     <h1 className="h3">{user.vinyls?.length} vinyls in collection</h1>
                 </div>
                 <div>
-                    {parseInt(userId) === currentUser? <button className="btn btn-primary">edit profile</button> : <button className="btn btn-primary" onClick={handleViewCollection}>view collection</button>}
+                    {parseInt(userId) === currentUser? <button className="btn btn-primary" onClick={(event) => {
+                        event.preventDefault()
+                        navigate('/editprofile')
+                    }}>edit profile</button> : <button className="btn btn-primary" onClick={handleViewCollection}>view collection</button>}
                 </div>
             </div>
             

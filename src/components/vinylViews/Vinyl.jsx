@@ -19,7 +19,7 @@ export const Vinyl = ({vinyl}) => {
                         <section className='user m-2' onClick={handleClick}>user: {vinyl.user.fullName}</section>
                     </div>
                     <div className='image col m-2'>
-                        <img src={`${vinyl.albumArt}`} alt={`${vinyl.albumName}`} className='img-fluid'/>
+                        <img src={`${vinyl.albumArt}`} alt={`album art`} className='img-fluid'/>
                     </div>
                 </div>
                     <div className='btn-container text-center mt-auto' >

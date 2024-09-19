@@ -24,14 +24,16 @@ export const FilterBar = ({setFilteredVinyl, allVinyl}) => {
         let filtercopy = [...allVinyl]
         if (!filterValues.genre && !filterValues.text) {
            filtercopy = [...allVinyl] 
+           
         }
         if(filterValues.genre !== 0){
             filtercopy =filtercopy.filter(vinyl => vinyl.genreId === parseInt(filterValues.genre))
         }
         if(filterValues.text){
-            filtercopy = filtercopy.filter(vinyl => ((vinyl.albumName.toLowerCase().includes(filterValues.text)) || vinyl.artist.toLowerCase().includes(filterValues.text) ))
+            filtercopy = filtercopy.filter(vinyl => ((vinyl.albumName.toLowerCase().includes(filterValues.text.toLocaleLowerCase())) || vinyl.artist.toLowerCase().includes(filterValues.text.toLocaleLowerCase()) ))
         }
-        setFilteredVinyl(filtercopy)
+        setFilteredVinyl(filtercopy.reverse())
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [filterValues, allVinyl])
     return (
         <div>
