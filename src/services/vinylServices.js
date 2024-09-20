@@ -15,3 +15,16 @@ export const postVinyl = (vinyl) => {
         body: JSON.stringify(vinyl)
     })
 }
+
+export const getVinylById = (id) => {
+    return fetch(`http://localhost:8088/vinyls/${id}?_expand=user&_expand=genre&_expand=condition`).then(res => res.json())
+} 
+export const updateVinyl = (vinyl) => {
+    return fetch(`http://localhost:8088/vinyls/${vinyl.id}`, {
+        method: 'PUT',
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify(vinyl)
+    })
+}

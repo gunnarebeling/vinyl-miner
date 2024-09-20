@@ -2,11 +2,14 @@ import { Outlet, Route, Routes } from "react-router-dom"
 import { NavBar } from "../components/NavBar/NavBar"
 import { AllVinyl } from "../components/vinylViews/AllVinyl"
 import { UsersVinyl } from "../components/vinylViews/UsersVinyl"
-import { useEffect, useState } from "react"
+import { createContext, useEffect, useState } from "react"
 import { Profile } from "../components/profile/Profile"
 import { NewVinylForm } from "../components/Forms/NewVinylForm"
 import { EditProfile } from "../components/Forms/EditProfile"
+import { EditVinylForm } from "../components/Forms/EditVinylForm"
+import { VinylDetails } from "../components/vinylViews/VinylDetails"
 
+export const UserContext = createContext()
 export const ApplicationViews = () => {
     const [currentUser, setCurrentUser]= useState(0)
 
@@ -17,23 +20,30 @@ export const ApplicationViews = () => {
         setCurrentUser(currentUserId)
     }, [])
     return (
-        <Routes>
-            <Route 
-                path="/"
-                element={
-                    <>
-                        <NavBar currentUser={currentUser}/>
-                        <Outlet/>
-                    </>
-                }>
-                    <Route index element={<AllVinyl/>}/>
-                    <Route path="/collection/:userId" element={<UsersVinyl currentUser={currentUser}/>}/>
-                    <Route path="/profile/:userId" element={<Profile currentUser={currentUser}/>}/>
-                    <Route path="NewVinyl" element={<NewVinylForm currentUser={currentUser}/>}/>
-                    <Route path="editprofile" element={<EditProfile currentUser={currentUser}/>}/>
+        <UserContext.Provider value={{currentUser}}>
+            <Routes>
+                <Route 
+                    path="/"
+                    element={
+                        <>
+                            <NavBar currentUser={currentUser}/>
+                            <Outlet/>
+                        </>
+                    }>
+                        <Route index element={<AllVinyl/>}/>
+                        <Route path="/collection/:userId" element={<UsersVinyl currentUser={currentUser}/>}/>
+                        <Route path="/profile/:userId" element={<Profile currentUser={currentUser}/>}/>
+                        <Route path="NewVinyl" element={<NewVinylForm currentUser={currentUser}/>}/>
+                        <Route path="editprofile" element={<EditProfile currentUser={currentUser}/>}/>
+                        <Route path='details/:vinylId'>
+                            <Route index element={<VinylDetails/>}/>
+                            <Route path="edit" element={<EditVinylForm/>}/>
+
+                        </Route>
 
 
-            </Route>
-        </Routes>
+                </Route>
+            </Routes>
+        </UserContext.Provider>
     )
 }

@@ -1,3 +1,7 @@
 .card {
     height: 100%;
 }
+.info-section{
+    font-size: calc(1.1vw + 1.1vh);
+    
+}

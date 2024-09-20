@@ -1,10 +1,11 @@
-import { useEffect, useState } from "react"
+import { useEffect, useReducer, useState } from "react"
 import { getUserById, updateUser } from "../../services/userService"
 import { useNavigate } from "react-router-dom"
+import { formReducer } from "../../services/reduceServices"
 
 export const EditProfile = ({currentUser}) => {
     const [userInfo, setUserInfo] = useState({})
-    const [newInfo , setNewInfo] = useState({fullName: ''})
+    const [newInfo , dispatch] = useReducer(formReducer, {} ) 
     const navigate = useNavigate()
 
     useEffect(() => {
@@ -15,8 +16,7 @@ export const EditProfile = ({currentUser}) => {
     }, [currentUser])
     useEffect(() => {
         if(Object.keys(userInfo) !== 0){
-            let copy = {...userInfo}
-            setNewInfo(copy)
+           dispatch({type: 'setNewInfo', payload: userInfo})
 
         }
 
@@ -46,12 +46,16 @@ export const EditProfile = ({currentUser}) => {
                     <header className="text-decoration-underline m-3 h3">Full Name</header>
                     <input 
                     type="text" 
-                    id="fullname"  
+                    id="fullName"  
                     value={newInfo.fullName || ''}
                     onChange={(event) => {
-                        let copy = {...newInfo}
-                        copy.fullName = event.target.value
-                        setNewInfo(copy)
+                        const { id , value } = event.target
+                        
+                        dispatch({
+                            type: 'handleInput',
+                            field: id,
+                            value: value    
+                        })
                     }} />
                 </fieldset>
                 <fieldset>
@@ -61,9 +65,12 @@ export const EditProfile = ({currentUser}) => {
                     id="email"   
                     value={newInfo.email || ''}
                     onChange={(event) => {
-                        let copy = {...newInfo}
-                        copy.email = event.target.value
-                        setNewInfo(copy)
+                        const {id , value } = event.target
+                        dispatch({
+                            type: 'handleInput',
+                            field: id,
+                            value: value
+                        })
                     }} />
                 </fieldset>
                 <fieldset className="submit-button">

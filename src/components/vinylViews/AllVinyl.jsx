@@ -28,7 +28,7 @@ export const AllVinyl = () => {
             <FilterBar setFilteredVinyl={setFilteredVinyl} allVinyl={allVinyl}/>
             <div className="vinyls-container row border mx-2">
                 {filteredVinyl?.reverse().map(vinyl => (
-                    <Vinyl vinyl={vinyl} key={vinyl.id}/>    
+                    <Vinyl vinyl={vinyl} key={vinyl.id} generalView={true}/>    
                 ))}
 
             </div>
