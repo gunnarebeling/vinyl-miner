@@ -27,7 +27,7 @@ export const UsersVinyl = ({currentUser}) => {
             </div>
             <div className="collection-container border p-2 row">
                 {usersVinyl?.map(vinyl => (
-                    <Vinyl vinyl={vinyl} key={vinyl.id} generalView={false}/>
+                    <Vinyl vinyl={vinyl} key={vinyl.id} generalView={true}/>
                 ))}
 
             </div>

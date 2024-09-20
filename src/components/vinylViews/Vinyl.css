@@ -4,4 +4,10 @@
 .info-section{
     font-size: calc(1.1vw + 1.1vh);
     
+    
+}
+.image-container img {
+    object-fit: contain;
+    width: 100%; /* Ensure the image takes up the full width of its container */
+    height: 300px; /* Set a fixed height */
 }

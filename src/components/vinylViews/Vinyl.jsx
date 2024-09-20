@@ -14,7 +14,7 @@ export const Vinyl = ({vinyl, generalView}) => {
         navigate(`/details/${vinyl.id}`)
     }
     const handleEdit = () => {
-        navigate('edit')
+        navigate(`/details/${vinyl.id}/edit`)
     }
     
     return (
@@ -29,8 +29,8 @@ export const Vinyl = ({vinyl, generalView}) => {
                         <section className='info-section condition d-flex m-2 flex-grow-1'>condition: {vinyl.condition?.name}</section>
                         <section className='info-section user m-2 d-flex flex-grow-1' onClick={handleClick}>user: {vinyl.user?.fullName}</section>
                     </div>
-                    <div className='image col m-2'>
-                        <img src={`${vinyl.albumArt}`} alt={`album art`} className='img-fluid'/>
+                    <div className='image-container col m-2'>
+                        <img src={`${vinyl.albumArt}`} alt={`album art`} className='img-fluid fixed-size'/>
                     </div>
                 </div>
                     {generalView ?
