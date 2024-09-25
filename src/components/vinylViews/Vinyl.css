@@ -11,3 +11,10 @@
     width: 100%; /* Ensure the image takes up the full width of its container */
     height: 300px; /* Set a fixed height */
 }
+.vinyl-container {
+    background-color: rgba(229, 222, 214, 0.706);
+}
+
+.btn-info{
+    background-color: rgba(227, 135, 227, 0.211);
+}

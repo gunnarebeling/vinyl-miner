@@ -124,4 +124,34 @@ table {
   border-collapse: collapse;
   border-spacing: 0;
 }
+body{
+  background-color: antiquewhite;
+}
+
+
+.bodoni-moda-sc-title {
+  font-family: "Bodoni Moda SC", serif;
+  font-optical-sizing: auto;
+  font-weight: 600;
+  font-style: normal;
+}
+
+.custom-link {
+  color: rgba(227, 135, 227, 0.713); /* Default link color */
+}
+
+.custom-link:hover {
+  color: rgba(180, 108, 180, 0.704); /* Color on hover */
+  text-decoration: underline;
+}
+
+/* Icon visibility on hover */
+.hover-icon {
+  display: none;
+  margin-left: 5px;
+}
+
+.custom-link:hover .hover-icon {
+  display: inline-block;
+}
 

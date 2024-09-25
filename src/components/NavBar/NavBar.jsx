@@ -1,9 +1,10 @@
 import { Link, useNavigate } from "react-router-dom"
+import './NavBar.css'
 
 export const NavBar = ({currentUser}) => {
     const navigate = useNavigate()
     return (
-        <ul className="nav bg-dark">
+        <ul className="nav ">
             <li className="nav-item">
                 <Link className="nav-link" to='/' >All Vinyl</Link>
             </li>
