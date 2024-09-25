@@ -28,3 +28,8 @@ export const updateVinyl = (vinyl) => {
         body: JSON.stringify(vinyl)
     })
 }
+export const deleteVinyl = (vinylId) => {
+    return fetch(`http://localhost:8088/vinyls/${vinylId}`, {
+        method: "DELETE"
+    })
+}

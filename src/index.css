@@ -138,6 +138,7 @@ body{
 
 .custom-link {
   color: rgba(227, 135, 227, 0.713); /* Default link color */
+  cursor: pointer;
 }
 
 .custom-link:hover {
