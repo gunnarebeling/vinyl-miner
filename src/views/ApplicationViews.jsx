@@ -8,6 +8,8 @@ import { NewVinylForm } from "../components/Forms/NewVinylForm"
 import { EditProfile } from "../components/Forms/EditProfile"
 import { EditVinylForm } from "../components/Forms/EditVinylForm"
 import { VinylDetails } from "../components/vinylViews/VinylDetails"
+import { NewTrade } from "../components/Forms/NewTrade"
+import { TradesHomeView } from "../components/trades/tradesHomeview"
 
 export const UserContext = createContext()
 export const ApplicationViews = () => {
@@ -40,6 +42,8 @@ export const ApplicationViews = () => {
                             <Route path="edit" element={<EditVinylForm/>}/>
 
                         </Route>
+                        <Route path="/tradeform/:tradeInitVinylId" element={<NewTrade/>} />
+                        <Route path="trades" element={<TradesHomeView/>}/>
 
 
                 </Route>

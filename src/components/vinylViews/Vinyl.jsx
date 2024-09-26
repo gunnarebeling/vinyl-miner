@@ -53,6 +53,9 @@ export const Vinyl = ({vinyl, generalView}) => {
         }
         getAndSetLikes()
     }
+    const handleTrade = () =>{
+        navigate(`/tradeform/${vinyl.id}`)
+    }
     
     return (
                        
@@ -77,7 +80,11 @@ export const Vinyl = ({vinyl, generalView}) => {
                     </div>)
                     
                      : (<div className='btn-container text-center mt-auto' >
-                        {(vinyl.userId === parseInt(currentUser)) ? <div><button className='m-2 btn btn-info' onClick={handleEdit}>edit</button> <button className='m-2 btn btn-info' onClick={handleDelete}>Delete</button></div> : <button className='m-2 btn btn-info' onClick={handleLike}>like</button> }
+                        {(vinyl.userId === parseInt(currentUser)) ? <div><button className='m-2 btn btn-info' onClick={handleEdit}>edit</button> <button className='m-2 btn btn-info' onClick={handleDelete}>Delete</button></div> 
+                        : 
+                        <div>
+                            <button className='m-2 btn btn-info' onClick={handleLike}>like</button><button className='m-2 btn btn-info' onClick={handleTrade}>Trade</button>
+                        </div> }
                         
                        
                     </div>)
