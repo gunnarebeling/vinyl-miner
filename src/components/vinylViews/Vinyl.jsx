@@ -39,19 +39,21 @@ export const Vinyl = ({vinyl, generalView}) => {
         })
     }
     const handleLike = () => {
+        
         const likeObj = likes.find(like => like.userId == currentUser)
         if (likeObj) {
-            UpdateLike(likeObj)
+            UpdateLike(likeObj).then(()=> getAndSetLikes())
+
         }else{
             const obj = {
                 vinylId: vinyl.id,
                 userId: currentUser,
                 liked: true
             }
-            postLike(obj)
+            postLike(obj).then(()=> getAndSetLikes())
 
+            
         }
-        getAndSetLikes()
     }
     const handleTrade = () =>{
         navigate(`/tradeform/${vinyl.id}`)

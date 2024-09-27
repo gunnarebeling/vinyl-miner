@@ -8,7 +8,7 @@ export const TradesHomeView = () => {
     const [allTrades, setAllTrades] = useState([])
     const {currentUser} = useContext(UserContext)
     const [allVinyl, setAllVinyl] = useState([])
-    const [tradeVinyl, setTradeVinyl] = useState([])
+    const [acceptTriggered, setAcceptTriggered] = useState(false)
     const [tradePendingVinyl, setTradePendingVinyl] = useState([])
     const [tradeOfferVinyl, setTradeOfferVinyl] = useState([])
     const getAndSetTrades = () => {
@@ -19,7 +19,7 @@ export const TradesHomeView = () => {
     useEffect(() => {
         getAndSetTrades()
         
-    }, [])
+    }, [acceptTriggered])
     useEffect(() => {
         getAllVinyl().then(res => {
             setAllVinyl(res)
@@ -45,12 +45,20 @@ export const TradesHomeView = () => {
         
 
     }, [allVinyl, allTrades, currentUser])
+    
+    const tradeDelete = async (duplicateTrades) => {
+        
+        
+        const deletePromises = duplicateTrades.map(trade => deleteTrade(trade?.id))
 
-    const handleAccept = (event) => {
+        await Promise.all(deletePromises)
+    }
+
+    const handleAcceptDelete = async (event) => {
         event.preventDefault()
         const findInitVinyl = allVinyl.find(vinyl => vinyl.id === parseInt(event.target.dataset.initid))
         const findOfferVinyl = allVinyl.find(vinyl => vinyl.id === parseInt(event.target.dataset.offerid))
-        const findTrade = allTrades.find(trade => trade.tradeInitVinylId === findInitVinyl.id && trade.tradeOfferVinylId === findOfferVinyl.id)
+        const tradeMatch = allTrades.filter(trade => ((trade.tradeInitVinylId || trade.tradeOfferVinylId) === findInitVinyl.id) || ((trade.tradeOfferVinylId || trade.tradeInitVinylId )=== findOfferVinyl.id))
         const InitSwitch = {
             id: findInitVinyl.id,
             albumName: findInitVinyl.albumName,
@@ -69,10 +77,19 @@ export const TradesHomeView = () => {
             albumArt: findOfferVinyl.albumArt,
             userId: findInitVinyl.userId
         }
-        updateVinyl(InitSwitch).then(() => getAndSetTrades())
-        updateVinyl(offerSwitch).then(() => getAndSetTrades())
-        deleteTrade(findTrade.id).then(() => getAndSetTrades())
-        
+      
+        if(event.target.id === "accept"){
+            await tradeDelete(tradeMatch)
+            await updateVinyl(InitSwitch)
+            await updateVinyl(offerSwitch).then(() => {
+                setAcceptTriggered(!acceptTriggered)
+            })
+            
+        } else if(event.target.id === "decline"){
+            await tradeDelete(tradeMatch).then(() => {
+                setAcceptTriggered(!acceptTriggered)
+            })
+        }     
     }
     let pendingCount = 0
     let offerCount = 0
@@ -88,8 +105,8 @@ export const TradesHomeView = () => {
                             <div key={offerCount} className="offer-trade-container border border-2 m-2 px-3">
                                 <TradeInfo  tradeInitVinyl={vinyls?.tradeInitVinyl} tradeOfferVinyl={vinyls?.tradeOfferVinyl}/>
                                 <div className="text-center mb-3">
-                                    <button className="btn btn-primary m-3"  data-initid={vinyls.tradeInitVinyl.id} data-offerid={vinyls.tradeOfferVinyl.id} onClick={handleAccept}>Accept</button>
-                                    <button className="btn btn-warning ">Decline</button>
+                                    <button id="accept" className="btn btn-primary m-3"  data-initid={vinyls.tradeInitVinyl.id} data-offerid={vinyls.tradeOfferVinyl.id} onClick={handleAcceptDelete}>Accept</button>
+                                    <button id="decline" className="btn btn-warning " data-initid={vinyls.tradeInitVinyl.id} data-offerid={vinyls.tradeOfferVinyl.id} onClick={handleAcceptDelete}>Decline</button>
                                 </div>
                         </div>
                             )
@@ -108,7 +125,7 @@ export const TradesHomeView = () => {
                             <div key={pendingCount} className="pending-trade-container border border-2 m-2 px-3">
                                 <TradeInfo  tradeInitVinyl={vinyls?.tradeInitVinyl} tradeOfferVinyl={vinyls?.tradeOfferVinyl}/>
                                 <div className="text-center mb-3">
-                                    <button className="btn btn-warning ">Delete</button>
+                                    <button id="decline" className="btn btn-warning  " data-initid={vinyls.tradeInitVinyl.id} data-offerid={vinyls.tradeOfferVinyl.id} onClick={handleAcceptDelete}>Delete</button>
                                 </div>
                         </div>
                             )
