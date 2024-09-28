@@ -1,6 +1,9 @@
 .nav{
     text-align: center;
+    
 }
 .nav-link{
     font-size: large;
+    font-family: "Bodoni Moda SC", serif;
+    color: rgba(227, 135, 227, 0.713);
 }

@@ -103,7 +103,7 @@ export const TradesHomeView = () => {
                     if (vinyls.tradeInitVinyl.userId === currentUser) {
                         return (
                             
-                            <div key={offerCount} className="offer-trade-container border border-2 m-2 px-3">
+                            <div key={offerCount} className="offer-trade-container border-2 m-2 px-3">
                                 <TradeInfo  tradeInitVinyl={vinyls?.tradeInitVinyl} tradeOfferVinyl={vinyls?.tradeOfferVinyl}/>
                                 <div className="text-center mb-3">
                                     <button id="accept" className="btn btn-primary m-3"  data-initid={vinyls.tradeInitVinyl.id} data-offerid={vinyls.tradeOfferVinyl.id} onClick={handleAcceptDelete}>Accept</button>
@@ -123,7 +123,7 @@ export const TradesHomeView = () => {
                     pendingCount ++
                     if (vinyls.tradeOfferVinyl.userId === currentUser) {
                         return (
-                            <div key={pendingCount} className="pending-trade-container border border-2 m-2 px-3">
+                            <div key={pendingCount} className="pending-trade-container  border-2 m-2 px-3">
                                 <TradeInfo  tradeInitVinyl={vinyls?.tradeInitVinyl} tradeOfferVinyl={vinyls?.tradeOfferVinyl}/>
                                 <div className="text-center mb-3">
                                     <button id="decline" className="btn btn-warning  " data-initid={vinyls.tradeInitVinyl.id} data-offerid={vinyls.tradeOfferVinyl.id} onClick={handleAcceptDelete}>Delete</button>
