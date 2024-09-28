@@ -4,18 +4,18 @@ import './NavBar.css'
 export const NavBar = ({currentUser}) => {
     const navigate = useNavigate()
     return (
-        <ul className="nav ">
+        <ul className="nav border-bottom ">
             <li className="nav-item">
-                <Link className="nav-link" to='/' >All Vinyl</Link>
+                <Link className="nav-link custom-link" to='/' >All Vinyl</Link>
             </li>
             <li className="nav-item">
-                <Link className="nav-link" to={`/collection/${currentUser}`} >My Collection</Link>
+                <Link className="nav-link custom-link" to={`/collection/${currentUser}`} >My Collection</Link>
             </li>
             <li className="nav-item">
-                <Link className="nav-link" to={`/profile/${currentUser}`} >My Profile</Link>
+                <Link className="nav-link custom-link" to={`/profile/${currentUser}`} >My Profile</Link>
             </li>
             <li className="nav-item">
-                <Link className="nav-link" to={`/trades`} >Trades</Link>
+                <Link className="nav-link custom-link" to={`/trades`} >Trades</Link>
             </li>
            
             {localStorage.getItem("vinyl_user") ? (

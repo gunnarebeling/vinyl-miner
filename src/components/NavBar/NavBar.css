@@ -1,5 +1,6 @@
 .nav{
-    background-color: rgba(31, 30, 31, 0.702);
-    height: 3vw;
     text-align: center;
+}
+.nav-link{
+    font-size: large;
 }

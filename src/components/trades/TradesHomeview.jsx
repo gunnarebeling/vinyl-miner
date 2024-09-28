@@ -58,7 +58,8 @@ export const TradesHomeView = () => {
         event.preventDefault()
         const findInitVinyl = allVinyl.find(vinyl => vinyl.id === parseInt(event.target.dataset.initid))
         const findOfferVinyl = allVinyl.find(vinyl => vinyl.id === parseInt(event.target.dataset.offerid))
-        const tradeMatch = allTrades.filter(trade => ((trade.tradeInitVinylId || trade.tradeOfferVinylId) === findInitVinyl.id) || ((trade.tradeOfferVinylId || trade.tradeInitVinylId )=== findOfferVinyl.id))
+        const tradeMatchForAccepted = allTrades.filter(trade => ((trade.tradeInitVinylId || trade.tradeOfferVinylId) === findInitVinyl.id) || ((trade.tradeOfferVinylId || trade.tradeInitVinylId )=== findOfferVinyl.id))
+        const tradeMatchForDelete = allTrades.find(trade => (trade.tradeInitVinylId  === findInitVinyl.id) && (trade.tradeOfferVinylId === findOfferVinyl.id))
         const InitSwitch = {
             id: findInitVinyl.id,
             albumName: findInitVinyl.albumName,
@@ -79,14 +80,14 @@ export const TradesHomeView = () => {
         }
       
         if(event.target.id === "accept"){
-            await tradeDelete(tradeMatch)
+            await tradeDelete(tradeMatchForAccepted)
             await updateVinyl(InitSwitch)
             await updateVinyl(offerSwitch).then(() => {
                 setAcceptTriggered(!acceptTriggered)
             })
             
         } else if(event.target.id === "decline"){
-            await tradeDelete(tradeMatch).then(() => {
+            await deleteTrade(tradeMatchForDelete.id).then(() => {
                 setAcceptTriggered(!acceptTriggered)
             })
         }     
