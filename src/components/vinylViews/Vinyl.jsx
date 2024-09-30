@@ -66,10 +66,10 @@ export const Vinyl = ({vinyl, generalView}) => {
                 <div className='row info' >
                     <div className=' col info  d-flex flex-column '>
                         <section className='info-section title m-2 d-flex  '>Title: {vinyl?.albumName}</section>
-                        <section className='info-section artist m-2 d-flex '>Artist : {vinyl?.artist}</section>
+                        <section className='info-section artist m-2 name d-flex '>Artist : {vinyl?.artist}</section>
                         <section className='info-section genre m-2 d-flex '>genre: {vinyl.genre?.name}</section>
                         <section className='info-section condition d-flex m-2 '>condition: {vinyl.condition?.name}</section>
-                        <section className='info-section user m-2 d-flex  ' >user: <span onClick={handleClick}className="custom-link nav-link px-1">{vinyl.user?.fullName}</span></section>
+                        <section className='info-section user m-2 d-flex ' >user: <span onClick={handleClick}className="custom-link nav-link name px-1">{vinyl.user?.fullName}</span></section>
                         <section className='info-section condition d-flex m-2 '> likes: {likesCount} </section>
                     </div>
                     <div className='image-container col m-2'>
@@ -82,10 +82,10 @@ export const Vinyl = ({vinyl, generalView}) => {
                     </div>)
                     
                      : (<div className='btn-container text-center mt-auto' >
-                        {(vinyl.userId === parseInt(currentUser)) ? <div><button className='m-2 btn btn-primary' onClick={handleEdit}>edit</button> <button className='m-2 btn btn-info' onClick={handleDelete}>Delete</button></div> 
+                        {(vinyl.userId === parseInt(currentUser)) ? <div><button className='m-2 btn btn-primary' onClick={handleEdit}>edit</button> <button className='m-2 btn btn-warning' onClick={handleDelete}>Delete</button></div> 
                         : 
                         <div>
-                            <button className='m-2 btn btn-primary' onClick={handleLike}>like</button><button className='m-2 btn btn-info' onClick={handleTrade}>Trade</button>
+                            <button className='m-2 btn btn-primary' onClick={handleLike}>like</button><button className='m-2 btn btn-warning' onClick={handleTrade}>Trade</button>
                         </div> }
                         
                        

@@ -55,6 +55,8 @@ export const NewTrade = () => {
                 name="tradeOfferVinyl" 
                 id="tradeOfferVinyl"
                 value={tradeOfferVinyl.id}
+                style={{width: "fit-content"}}
+                className="mt-3"
                 onChange={(event) =>{
                     event.preventDefault()
                     const selectedVinyl = usersVinyl.find(vinyl => vinyl.id === parseInt(event.target.value))

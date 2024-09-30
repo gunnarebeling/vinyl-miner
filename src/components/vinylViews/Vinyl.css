@@ -18,3 +18,10 @@
 .btn-info{
     background-color:var(--bs-primary);
 }
+.name {
+    display: inline-block;  /* Allow width to be set */
+    max-width: 150px;      /* Set a max width as needed */
+    overflow: hidden;      /* Hide overflow content */
+    white-space: nowrap;    /* Prevent wrapping to a new line */
+    text-overflow: ellipsis; /* Add ellipsis for overflowing text */
+}
