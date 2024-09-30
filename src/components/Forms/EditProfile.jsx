@@ -41,42 +41,44 @@ export const EditProfile = ({currentUser}) => {
             <div className="header text-center m-3">
                 <header>Edit Profile</header>
             </div>
-            <form className="edit-profile text-center">
-                <fieldset>
-                    <header className="text-decoration-underline m-3 h3">Full Name</header>
-                    <input 
-                    type="text" 
-                    id="fullName"  
-                    value={newInfo.fullName || ''}
-                    onChange={(event) => {
-                        const { id , value } = event.target
-                        
-                        dispatch({
-                            type: 'handleInput',
-                            field: id,
-                            value: value    
-                        })
-                    }} />
-                </fieldset>
-                <fieldset>
-                    <header className="text-decoration-underline m-3 h3">Email</header>
-                    <input 
-                    type="text"
-                    id="email"   
-                    value={newInfo.email || ''}
-                    onChange={(event) => {
-                        const {id , value } = event.target
-                        dispatch({
-                            type: 'handleInput',
-                            field: id,
-                            value: value
-                        })
-                    }} />
-                </fieldset>
-                <fieldset className="submit-button">
-                    <button className="btn btn-primary m-3" onClick={handelSubmit}>Submit</button>
-                </fieldset>
-            </form>
+            <div className="d-flex justify-content-center p-3 ">
+                <form className="form-container container bg-secondary rounded border  m-4 ">
+                    <fieldset className="border-bottom">
+                        <header className="text-decoration-underline m-3 h3">Full Name</header>
+                        <input 
+                        type="text" 
+                        id="fullName"  
+                        value={newInfo.fullName || ''}
+                        onChange={(event) => {
+                            const { id , value } = event.target
+                            
+                            dispatch({
+                                type: 'handleInput',
+                                field: id,
+                                value: value    
+                            })
+                        }} />
+                    </fieldset>
+                    <fieldset>
+                        <header className="text-decoration-underline m-3 h3">Email</header>
+                        <input 
+                        type="text"
+                        id="email"   
+                        value={newInfo.email || ''}
+                        onChange={(event) => {
+                            const {id , value } = event.target
+                            dispatch({
+                                type: 'handleInput',
+                                field: id,
+                                value: value
+                            })
+                        }} />
+                    </fieldset>
+                    <fieldset className="submit-button">
+                        <button className="btn btn-primary m-3" onClick={handelSubmit}>Submit</button>
+                    </fieldset>
+                </form>
+            </div>
         </div>
     )
 }

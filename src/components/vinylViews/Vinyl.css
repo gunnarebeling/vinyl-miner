@@ -12,9 +12,9 @@
     height: 300px; /* Set a fixed height */
 }
 .vinyl-container {
-    background-color: rgba(161, 157, 152, 0.706);
+    background-color: var(--bs-secondary);
 }
 
 .btn-info{
-    background-color: rgba(227, 135, 227, 0.211);
+    background-color:var(--bs-primary);
 }

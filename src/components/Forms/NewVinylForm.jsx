@@ -32,10 +32,10 @@ export const NewVinylForm = ({currentUser}) => {
             <div className="header text-center m-3">
                 <header>add to collection</header>
             </div>
-            <div className="form-container border m-3 shadow text-center">
-                <form>
+            <div className="d-flex justify-content-center p-3 ">
+                <form className="form-container container bg-secondary rounded border  m-4 ">
                     <fieldset>
-                        <p className="text-decoration-underline m-3 h3">Title</p>
+                        <p className="mt-3 h3">Title</p>
                         <input 
                         type="text"
                         placeholder="album title"
@@ -47,7 +47,7 @@ export const NewVinylForm = ({currentUser}) => {
                         }} />
                     </fieldset>
                     <fieldset>
-                        <p className="text-decoration-underline m-3 h3">Artist</p>
+                        <p className="mt-3 h3">Artist</p>
                         <input 
                         type="text"
                         placeholder="album artist"
@@ -59,7 +59,7 @@ export const NewVinylForm = ({currentUser}) => {
                         }} />
                     </fieldset>
                     <fieldset>
-                        <p className="text-decoration-underline m-3 h3">Album Art</p>
+                        <p className="mt-3 h3">Album Art</p>
                         <input 
                         type="text"
                         placeholder="album Art URL"
@@ -70,8 +70,8 @@ export const NewVinylForm = ({currentUser}) => {
                             setFormValues(copy)
                         }} />
                     </fieldset>
-                    <fieldset className="genre-dropdown m-3">
-                    <p className="text-decoration-underline m-3 h3">Genre</p>
+                    <fieldset className="genre-dropdown ">
+                    <p className="mt-3 h3">Genre</p>
                         <select 
                         name="genre" 
                         value={formValues.genreId} 
@@ -86,8 +86,8 @@ export const NewVinylForm = ({currentUser}) => {
                             })}
                         </select>
                     </fieldset>
-                    <fieldset className="condition-dropdown m-3">
-                    <p className="text-decoration-underline m-3 h3">Condition</p>
+                    <fieldset className="condition-dropdown">
+                    <p className="mt-3 h3">Condition</p>
                         <select 
                         name="condition" 
                         value={formValues.conditionId} 
@@ -102,7 +102,7 @@ export const NewVinylForm = ({currentUser}) => {
                             })}
                         </select>
                     </fieldset>
-                    <fieldset className="submit-button">
+                    <fieldset className="submit-button text-center">
                         <button className="btn btn-primary m-3" onClick={handelSubmit}>Submit</button>
                     </fieldset>
                 </form>

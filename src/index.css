@@ -105,6 +105,9 @@ section {
 }
 body {
   line-height: 1;
+  background-color: var(--bs-dark);
+  color: var(--bs-light);
+
 }
 ol,
 ul {
@@ -125,8 +128,16 @@ table {
   border-collapse: collapse;
   border-spacing: 0;
 }
-body{
-  background-color: rgb(36, 35, 34);
+:root {
+  --bs-primary: #E48DDD;
+  --bs-secondary: #767676;
+  --bs-dark: #302F2D;
+  --bs-light: #FFFDF8;
+  .btn-primary{
+    background-color: var(--bs-primary);
+  }
+ 
+  
 }
 
 
@@ -155,5 +166,36 @@ body{
 
 .custom-link:hover .hover-icon {
   display: inline-block;
+}
+.btn-info{
+  background-color:var(--bs-light);
+}
+.btn-primary{
+
+}
+input, select {
+  border-radius: 6px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  height: fit-content;
+}
+
+input:focus, select:focus {
+  border: 1px solid #a070ff; 
+  box-shadow: 0 0 8px #a070ff;
+}
+
+.form-group {
+  margin-bottom: 15px;
+}
+
+input, select {
+  height: 2rem;
+  width: 100%; 
+  box-sizing: border-box;
+}
+hr {
+  width: 90%;
+  margin: 0 auto;
+  margin-top: 20px;
 }
 

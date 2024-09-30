@@ -4,6 +4,7 @@ import { getVinylById, updateVinyl } from "../../services/vinylServices"
 import { useNavigate, useParams } from "react-router-dom"
 import { getGenres } from "../../services/genreService"
 import { getConditions } from "../../services/conditionsservices"
+import "./forms.css"
 
 
 export const EditVinylForm = () => {
@@ -45,116 +46,123 @@ export const EditVinylForm = () => {
 
     return (
 
-        <div>
+        <div >
             <div className="header text-center m-3">
                 <header>Edit Vinyl</header>
             </div>
-            <form className="edit-profile text-center">
-                <fieldset>
-                    <header className="text-decoration-underline m-3 h3">Artist</header>
-                    <input 
-                    type="text" 
-                    id="artist"  
-                    value={editedVinyl.artist || ''}
-                    onChange={(event) => {
-                        const { id , value } = event.target
-                        
-                        dispatch({
-                            type: 'handleInput',
-                            field: id,
-                            value: value    
-                        })
-                    }} />
-                </fieldset>
-                <fieldset>
-                    <header className="text-decoration-underline m-3 h3">Album Title</header>
-                    <input 
-                    type="text"
-                    id="albumName"   
-                    value={editedVinyl.albumName || ''}
-                    onChange={(event) => {
-                        const {id , value } = event.target
-                        dispatch({
-                            type: 'handleInput',
-                            field: id,
-                            value: value
-                        })
-                    }} />
-                </fieldset>
-                <fieldset>
-                    <header className="text-decoration-underline m-3 h3">Album Art</header>
-                    <input 
-                    type="text"
-                    id="albumArt"   
-                    value={editedVinyl.albumArt || ''}
-                    onChange={(event) => {
-                        const {id , value } = event.target
-                        dispatch({
-                            type: 'handleInput',
-                            field: id,
-                            value: value
-                        })
-                    }} />
-                </fieldset>
-                <fieldset>
-                    <header className="text-decoration-underline m-3 h3">genre</header>
-                    <select 
-                        name="genre"
-                        id="genreId"
-                        value={editedVinyl.genreId || ''}
-                        onChange={(event) =>{
-                            const {id, value} = event.target
+            <div className="d-flex justify-content-center p-3 ">
+                <form className="form-container container bg-secondary rounded border  m-4 ">
+                    <fieldset className=" ">
+                        <header className=" mt-3 h3">Artist</header>
+                        <input 
+                        type="text" 
+                        id="artist"  
+                        value={editedVinyl.artist || ''}
+                        onChange={(event) => {
+                            const { id , value } = event.target
+                            
                             dispatch({
                                 type: 'handleInput',
                                 field: id,
-                                value: parseInt(value)
+                                value: value    
                             })
-                        }}>
-                            {genres.map(genre => {
-                                return(
-                                    <option 
-                                    value={genre.id}
-                                    key={genre.id}
-                                    id="genreId"
-                                    >
-                                        {genre.name}
-                                    </option>
-                                    )
-                            })}
-                            
-                    </select>
-                </fieldset>
-                <fieldset>
-                    <header className="text-decoration-underline m-3 h3">Condition</header>
-                    <select 
-                        name="condition"
-                        id="conditionId"
-                        value={editedVinyl.conditionId || ''}
-                        onChange={(event) =>{
-                            const {id, value} = event.target
+                        }} />
+                    </fieldset>
+                    <hr />
+
+                    <fieldset className=" ">
+                        <header className=" mt-3 h3">Album Title</header>
+                        <input 
+                        type="text"
+                        id="albumName"   
+                        value={editedVinyl.albumName || ''}
+                        onChange={(event) => {
+                            const {id , value } = event.target
                             dispatch({
                                 type: 'handleInput',
                                 field: id,
-                                value: parseInt(value)
+                                value: value
                             })
-                        }}>
-                            {conditions.map(condition => {
-                                return(
-                                    <option 
-                                    value={condition.id}
-                                    key={condition.id}
-                                    >
-                                        {condition.name}
-                                    </option>
-                                    )
-                            })}
-                            
-                    </select>
-                </fieldset>
-                <fieldset className="submit-button">
-                    <button className="btn btn-primary m-3" onClick={handelSubmit}>Submit</button>
-                </fieldset>
-            </form>
+                        }} />
+                    </fieldset>
+                    <hr />
+                    <fieldset className=" ">
+                        <header className=" mt-3 h3">Album Art</header>
+                        <input 
+                        type="text"
+                        id="albumArt"   
+                        value={editedVinyl.albumArt || ''}
+                        onChange={(event) => {
+                            const {id , value } = event.target
+                            dispatch({
+                                type: 'handleInput',
+                                field: id,
+                                value: value
+                            })
+                        }} />
+                    </fieldset>
+                    <hr />
+                    <fieldset className="">
+                        <header className=" mt-3 h3">genre</header>
+                        <select 
+                            name="genre"
+                            id="genreId"
+                            value={editedVinyl.genreId || ''}
+                            onChange={(event) =>{
+                                const {id, value} = event.target
+                                dispatch({
+                                    type: 'handleInput',
+                                    field: id,
+                                    value: parseInt(value)
+                                })
+                            }}>
+                                {genres.map(genre => {
+                                    return(
+                                        <option 
+                                        value={genre.id}
+                                        key={genre.id}
+                                        id="genreId"
+                                        >
+                                            {genre.name}
+                                        </option>
+                                        )
+                                })}
+                                
+                        </select>
+                    </fieldset>
+                    <hr />
+                    <fieldset className=" ">
+                        <header className=" mt-3 h3">Condition</header>
+                        <select 
+                            name="condition"
+                            id="conditionId"
+                            value={editedVinyl.conditionId || ''}
+                            onChange={(event) =>{
+                                const {id, value} = event.target
+                                dispatch({
+                                    type: 'handleInput',
+                                    field: id,
+                                    value: parseInt(value)
+                                })
+                            }}>
+                                {conditions.map(condition => {
+                                    return(
+                                        <option 
+                                        value={condition.id}
+                                        key={condition.id}
+                                        >
+                                            {condition.name}
+                                        </option>
+                                        )
+                                })}
+                                
+                        </select>
+                    </fieldset>
+                    <fieldset className="submit-button text-center">
+                        <button className="btn btn-primary  m-3" onClick={handelSubmit}>Submit</button>
+                    </fieldset>
+                </form>
+            </div>
         </div>
     )
 }

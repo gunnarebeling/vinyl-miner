@@ -2,7 +2,7 @@ import { useContext, useEffect, useState } from "react"
 import { UserContext } from "../../views/ApplicationViews"
 import { useNavigate, useParams } from "react-router-dom"
 import { getAllVinyl } from "../../services/vinylServices"
-import './NewTrade.css'
+import './forms.css'
 import { postTrade } from "../../services/tradeService"
 import { TradeInfo } from "../trades/TradeInfo"
 

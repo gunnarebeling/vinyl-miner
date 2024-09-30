@@ -37,13 +37,14 @@ export const FilterBar = ({setFilteredVinyl, allVinyl}) => {
     }, [filterValues, allVinyl])
     return (
         <div>
-            <div className="d-flex justify-content-between py-2 px-4">
-                <div className="genre-dropdown">
+            <div className="d-flex justify-content-between align-items-center py-2 px-4">
+                <div className="genre-dropdown d-flex">
                 <label name="genre-dropdown-label" className="m-2">genre:</label>
                     <select 
                         name="genre"
                         onChange={handleGenreChange}
-                        value={filterValues.genre} >
+                        value={filterValues.genre}
+                        className="" >
                         <option value= '0'>all</option>
                         {genres.map(genre => {
                             return (
