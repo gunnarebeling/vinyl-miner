@@ -3,7 +3,7 @@
     
 }
 .nav-link{
-    font-size: large;
+    font-size: medium;
     font-family: "Bodoni Moda SC", serif;
     color: var(--bs-primary);
     text-decoration: none;

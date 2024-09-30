@@ -3,6 +3,7 @@ import { deleteTrade, getAllTrades } from "../../services/tradeService"
 import { UserContext } from "../../views/ApplicationViews"
 import { getAllVinyl, updateVinyl } from "../../services/vinylServices"
 import { TradeInfo } from "./TradeInfo"
+import './trades.css'
 
 export const TradesHomeView = () => {
     const [allTrades, setAllTrades] = useState([])
@@ -96,8 +97,8 @@ export const TradesHomeView = () => {
     let offerCount = 0
     return (
         <div id="trade-offers" className="trade-info-container">
-           <div id="pending-offers-container" className="container ">
-                <header className="h3 text-center m-3">Trade Offers</header>
+           <div id="pending-offers-container" className={`container ${!tradeOfferVinyl.find(trade => trade.tradeInitVinyl.userId === currentUser) && "d-none"}`} >
+                <header className="h3 text-center bodoni-moda-sc-title m-3">Trade Offers</header>
                 {tradeOfferVinyl.map(vinyls => {
                     offerCount ++
                     if (vinyls.tradeInitVinyl.userId === currentUser) {
@@ -117,8 +118,8 @@ export const TradesHomeView = () => {
             </div>     
 
             
-            <div id="pending-trades-container" className="container ">
-                <header className="h3 text-center m-3">Trades Pending</header>
+            <div id="pending-trades-container" className={`container ${!tradePendingVinyl.find(trade => trade.tradeOfferVinyl.userId === currentUser) && "d-none"} `}>
+                <header className="h3 text-center bodoni-moda-sc-title m-3">Trades Pending</header>
                 {tradePendingVinyl.map(vinyls => {
                     pendingCount ++
                     if (vinyls.tradeOfferVinyl.userId === currentUser) {
@@ -134,6 +135,15 @@ export const TradesHomeView = () => {
                     }
                 })}  
             </div>
+            {(!tradePendingVinyl.find(trade => trade.tradeOfferVinyl.userId === currentUser)) && (!tradeOfferVinyl.find(trade => trade.tradeInitVinyl.userId === currentUser)) && 
+            
+                <div className={"d-flex justify-content-center align-items-center p-3  no-trades-container "}>
+                    <div className="container bg-secondary rounded border display-5 text-center m-4">
+                        <h1>NO TRADES!!</h1>
+                        <h1>COME ON... SHARING IS CARING!!</h1>
+                    </div>
+                </div>
+            }
         </div>
     )
 }

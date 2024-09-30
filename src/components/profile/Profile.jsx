@@ -21,13 +21,13 @@ export const Profile = ({currentUser}) => {
     return (
         <>
             <div className="header text-center  m-3">
-                {parseInt(userId) === currentUser ? <header>My Profile</header> : <header>{user?.fullName}'s Profile</header>}
+                {parseInt(userId) === currentUser ? <header className="bodoni-moda-sc-title">My Profile</header> : <header className="bodoni-moda-sc-title">{user?.fullName}'s Profile</header>}
             </div>
             <div className="d-flex justify-content-center">
                 <div className="container bg-secondary rounded border text-center  m-4 ">
-                    <div className="name ">
+                    <div className=" ">
                         <p className="h3 text-decoration-underline">Name</p>
-                        <h1 className="h3">{user.fullName}</h1>
+                        <h1 className="h3 ">{user.fullName}</h1>
                     </div>
                     {parseInt(userId) === currentUser && 
                         <div className="email">

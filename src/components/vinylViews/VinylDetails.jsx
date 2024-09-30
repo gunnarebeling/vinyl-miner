@@ -16,9 +16,11 @@ export const VinylDetails = () => {
         <>
        
        <div className="header-container m-3">
-            <header className="display-6 text-center">Details</header>
+            <header className="display-6 bodoni-moda-sc-title text-center">Details</header>
         </div>
+        <div className=" container px-4 mx-5">
         <Vinyl vinyl={vinylObj} generalView={false}/>
+        </div>
        
         </>
     )

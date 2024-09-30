@@ -23,7 +23,7 @@ export const UsersVinyl = ({currentUser}) => {
     return (
         <>
             <div className="header text-center d-flex justify-content-between m-3">
-                {parseInt(userId) === currentUser ? (<><header className="align-self-center mx-auto">My Collection</header> <button className="btn btn-primary" onClick={handleAddToCollection}>+</button></>) : <header>{usersVinyl[0]?.user.fullName}'s Collection</header>}
+                {parseInt(userId) === currentUser ? (<><header className="align-self-center bodoni-moda-sc-title mx-auto">My Collection</header> <button className="btn btn-primary" onClick={handleAddToCollection}>+</button></>) : <header className="bodoni-moda-sc-title">{usersVinyl[0]?.user.fullName}'s Collection</header>}
             </div>
             <div className="collection-container border p-2 row">
                 {usersVinyl?.map(vinyl => (
