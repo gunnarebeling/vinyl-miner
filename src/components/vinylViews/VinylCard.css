@@ -1,0 +1,16 @@
+.vinyl-card{
+    display: inline-block;
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+    
+    
+    
+}
+.custom-img{
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+}
+.vinyl{
+    max-width: 200px;
+}

@@ -1,11 +1,12 @@
 import { Vinyl } from "../vinylViews/Vinyl"
+import { VinylCard } from "../vinylViews/vinylcard"
 
 export const TradeInfo = ({tradeInitVinyl, tradeOfferVinyl} ) => {
     return (
-        <div className="d-block d-md-flex justify-content-md-center text-center align-items-center">
+        <div className="d-inline-block d-md-flex justify-content-md-center text-center align-items-center">
             <div className="p-2 trade-card d-flex justify-content-end my-5 col-3 mx-auto w-100 h-auto">
                     {(tradeOfferVinyl?.id) &&    
-                        <Vinyl generalView={true} vinyl={tradeOfferVinyl}/>
+                        <VinylCard generalView={true} vinyl={tradeOfferVinyl}/>
                     }
             </div>
         
@@ -16,7 +17,7 @@ export const TradeInfo = ({tradeInitVinyl, tradeOfferVinyl} ) => {
             <div className="p-2 trade-card my-5  col-3 mx-auto w-100 h-auto">
                 <div>
                 {(tradeInitVinyl?.id) &&
-                            <Vinyl generalView={true} vinyl={tradeInitVinyl}/> 
+                            <VinylCard generalView={true} vinyl={tradeInitVinyl}/> 
                         }
                 </div>
             </div>  

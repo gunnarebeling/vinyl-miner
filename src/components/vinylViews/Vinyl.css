@@ -11,8 +11,12 @@
     width: 100%; /* Ensure the image takes up the full width of its container */
     height: 300px; /* Set a fixed height */
 }
-.vinyl-container {
-    background-color: var(--bs-secondary);
+.vinyls-container {
+    /* background-color: var(--bs-secondary); */
+    display: flex;
+    justify-content: space-between; /* Distributes items with space between them */
+    flex-grow: 1;
+
 }
 
 .btn-info{
