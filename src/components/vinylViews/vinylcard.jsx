@@ -6,7 +6,9 @@ import './VinylCard.css'
 import { deleteVinyl } from "../../services/vinylServices"
 import { getLikesByVinylId, postLike, UpdateLike } from "../../services/likesServices"
 
+
 export const VinylCard = ({vinyl, generalView}) => {
+    
     const [likes, setLikes] = useState([])
     const [likesCount, setLikesCount] = useState(0)
     const {currentUser} = useContext(UserContext)
@@ -16,6 +18,10 @@ export const VinylCard = ({vinyl, generalView}) => {
             setLikes(res)
         })
     }
+    useEffect(() => {
+        const popoverTriggerList = document.querySelectorAll('[data-bs-toggle="popover"]');
+        const popoverList = [...popoverTriggerList].map(popoverTriggerEl => new bootstrap.Popover(popoverTriggerEl));
+      }, []);
     useEffect(() => {
         getAndSetLikes()
     }, [vinyl])
@@ -85,7 +91,8 @@ export const VinylCard = ({vinyl, generalView}) => {
                 {generalView ?
                     (<div className='btn-container text-center mt-auto'>
                         <button className='m-2 btn btn-primary'onClick={handleShowDetails}>Show Details</button>
-                    </div>)
+                    </div>
+                    )
                     
                      : (<div className='btn-container text-center mt-auto' >
                         {(vinyl.userId === parseInt(currentUser)) ? <div><button className='m-2 btn btn-primary' onClick={handleEdit}>edit</button> <button className='m-2 btn btn-warning' onClick={handleDelete}>Delete</button></div> 
