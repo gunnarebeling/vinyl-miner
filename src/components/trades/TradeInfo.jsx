@@ -4,7 +4,7 @@ import "./trades.css"
 
 export const TradeInfo = ({tradeInitVinyl, tradeOfferVinyl} ) => {
     return (
-        <div className="row trade-container">
+        <div className="row trade-container d-flex align-items-stretch">
             <div className="col d-flex justify-content-center">
                 <div>
                     {(tradeOfferVinyl?.id) &&    
@@ -13,8 +13,8 @@ export const TradeInfo = ({tradeInitVinyl, tradeOfferVinyl} ) => {
                 </div>
             </div>
         
-            <div className="col d-flex justify-content-center align-items-center">
-                <h1>for</h1>
+            <div className=" trade-for col d-flex justify-content-center align-items-center">
+                <h1><i className="fa-solid fa-arrow-right-arrow-left fa-lg"></i></h1>
             </div>
             
             <div className="col d-flex justify-content-center">

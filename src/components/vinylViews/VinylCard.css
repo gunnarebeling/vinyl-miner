@@ -1,7 +1,9 @@
 .vinyl-card{
-    display: inline-block;
+    max-width: fit-content;
     padding-left: 0 !important;
     padding-right: 0 !important;
+    min-height: 200px;
+    
     
     
     
@@ -13,4 +15,7 @@
 }
 .vinyl{
     max-width: 200px;
+}
+.btn{
+    max-height: 55px;
 }

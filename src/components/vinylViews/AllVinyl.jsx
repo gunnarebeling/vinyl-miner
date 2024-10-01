@@ -23,16 +23,18 @@ export const AllVinyl = () => {
 
     return (
         <>
-            <div className="header-container m-3">
+            <div className="header-container  m-3">
                 <header className="display-6 text-center bodoni-moda-sc-title">All Vinyl</header>
             </div>
             <FilterBar setFilteredVinyl={setFilteredVinyl} allVinyl={allVinyl}/>
             <div className="vinyls-container justify-content-center row  mx-2">
+                
                 {filteredVinyl?.reverse().map(vinyl => (
                     <VinylCard vinyl={vinyl} key={vinyl.id} generalView={true}/>    
                 ))}
+                </div>
 
-            </div>
+    
         
         </>
     ) 

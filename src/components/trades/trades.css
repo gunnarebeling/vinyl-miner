@@ -2,6 +2,10 @@
     width: 100vw;   /* 100% of the viewport width */
         height: 80vh;  /* 100% of the viewport height */
 }
-.trade-container{
-    
+
+.trade-container .col {
+    min-height: 300px; /* Set to desired height */
+}
+.trade-for{
+    max-width: 100px;
 }

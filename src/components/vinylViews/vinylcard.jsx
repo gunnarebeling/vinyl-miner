@@ -61,8 +61,8 @@ export const VinylCard = ({vinyl, generalView}) => {
     }
     
     return (
-        <section className="vinyl-card bg-secondary m-3 border">
-            <div className={`shadow ${generalView && "vinyl"} `}>
+        <section className=" bg-secondary vinyl-card  m-3 border">
+            <div className={`shadow d-inline-blick ${generalView && "vinyl"} `}>
                 <div>
                     <img src={`${vinyl.albumArt}`} alt={`album art`} className="img-fluid custom-img fixed-size"/>
                 </div> 
