@@ -3,6 +3,7 @@ import { UserContext } from "../../views/ApplicationViews"
 import { useNavigate, useParams } from "react-router-dom"
 import { getAllVinyl } from "../../services/vinylServices"
 import './forms.css'
+import "../trades/trades.css"
 import { postTrade } from "../../services/tradeService"
 import { TradeInfo } from "../trades/TradeInfo"
 
@@ -73,7 +74,7 @@ export const NewTrade = () => {
                 </select>
             </div>
             
-                <div className="container border  mt-5">
+                <div className="container trade-container border  mt-5">
                 <TradeInfo tradeInitVinyl={tradeInitVinyl} tradeOfferVinyl={tradeOfferVinyl}/>
             
                 <div className="text-center m-3">

@@ -62,19 +62,26 @@ export const VinylCard = ({vinyl, generalView}) => {
     
     return (
         <section className="vinyl-card bg-secondary m-3 border">
-            <div className="shadow vinyl ">
+            <div className={`shadow ${generalView && "vinyl"} `}>
                 <div>
                     <img src={`${vinyl.albumArt}`} alt={`album art`} className="img-fluid custom-img fixed-size"/>
                 </div> 
                 <div className="release-details d-flex flex-column ">
-                    <div className="info">
-                        <div className=""><span >{vinyl.albumName}</span></div>
-                        <h5 className="dark-text two_row_ellipsis">{vinyl?.artist}</h5>
-                    <div><span>{vinyl.genre?.name}</span></div>
-                    <div><span>{vinyl.condition?.name}</span></div>
-                    <div><span>user: {vinyl.user?.fullName}</span></div>
-                    <div><span>Likes: {likesCount}</span></div>
-                </div>
+                    <div className="info ">
+                        <div className="mx-1 mb-1"><span >{vinyl.albumName}</span></div>
+                        <div className="mx-1 mb-1"><span >{vinyl?.artist}</span></div>
+                        <div className="mx-1 mb-1"><span>{vinyl.genre?.name}</span></div>
+                        {!generalView &&
+                        <div className="mx-1 mb-1"><span>condition: {vinyl.condition?.name}</span></div>
+                        
+                        }
+                        <div className="mx-1 mb-1"><span>user: <span onClick={handleClick}className="custom-link nav-link name px-1">{vinyl.user?.fullName}</span></span></div>
+                        {!generalView &&
+                        
+                        <div className="mx-1 mb-1"><span>Likes: {likesCount}</span></div>
+                        
+                        }
+                     </div>
                 {generalView ?
                     (<div className='btn-container text-center mt-auto'>
                         <button className='m-2 btn btn-primary'onClick={handleShowDetails}>Show Details</button>
