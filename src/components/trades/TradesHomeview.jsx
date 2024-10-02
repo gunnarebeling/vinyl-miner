@@ -60,8 +60,8 @@ export const TradesHomeView = () => {
         event.preventDefault()
         const findInitVinyl = allVinyl.find(vinyl => vinyl.id === parseInt(event.target.dataset.initid))
         const findOfferVinyl = allVinyl.find(vinyl => vinyl.id === parseInt(event.target.dataset.offerid))
-        const tradeMatchForAccepted = allTrades.filter(trade => ((trade.tradeInitVinylId || trade.tradeOfferVinylId) === findInitVinyl.id) || ((trade.tradeOfferVinylId || trade.tradeInitVinylId )=== findOfferVinyl.id))
-        const tradeMatchForDelete = allTrades.find(trade => (trade.tradeInitVinylId  === findInitVinyl.id) && (trade.tradeOfferVinylId === findOfferVinyl.id))
+        const tradeMatchForAccepted = allTrades.filter(trade => ((trade.tradeInitVinylId || trade.tradeOfferVinylId) === findInitVinyl?.id) || ((trade.tradeOfferVinylId || trade.tradeInitVinylId )=== findOfferVinyl?.id))
+        const tradeMatchForDelete = allTrades.find(trade => (trade.tradeInitVinylId  === findInitVinyl?.id) && (trade.tradeOfferVinylId === findOfferVinyl?.id))
         const InitSwitch = {
             id: findInitVinyl.id,
             albumName: findInitVinyl.albumName,
@@ -112,8 +112,8 @@ export const TradesHomeView = () => {
                                 <div key={offerCount} className="offer-trade-container border-2 m-2 px-3">
                                     <TradeInfo  tradeInitVinyl={vinyls?.tradeInitVinyl} tradeOfferVinyl={vinyls?.tradeOfferVinyl}/>
                                     <div className="text-center mb-3">
-                                        <button id="accept" className="btn btn-primary m-3"  data-initid={vinyls.tradeInitVinyl.id} data-offerid={vinyls.tradeOfferVinyl.id} onClick={handleAcceptDelete}>Accept</button>
-                                        <button id="decline" className="btn btn-warning " data-initid={vinyls.tradeInitVinyl.id} data-offerid={vinyls.tradeOfferVinyl.id} onClick={handleAcceptDelete}>Decline</button>
+                                        <button id="accept" className="btn btn-primary m-3"  data-initid={vinyls.tradeInitVinyl?.id} data-offerid={vinyls.tradeOfferVinyl?.id} onClick={handleAcceptDelete}>Accept</button>
+                                        <button id="decline" className="btn btn-warning " data-initid={vinyls.tradeInitVinyl?.id} data-offerid={vinyls.tradeOfferVinyl?.id} onClick={handleAcceptDelete}>Decline</button>
                                     </div>
                             </div>
                                 )

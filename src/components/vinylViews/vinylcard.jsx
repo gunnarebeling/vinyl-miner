@@ -9,7 +9,7 @@ import { OverlayTrigger, Popover, PopoverBody, PopoverHeader } from "react-boots
 import { VinylPopover } from "./VinylPopover"
 
 
-export const VinylCard = ({vinyl, generalView}) => {
+export const VinylCard = ({vinyl, refreshOnClick}) => {
     
     const [likes, setLikes] = useState([])
     const [likesCount, setLikesCount] = useState(0)
@@ -45,9 +45,15 @@ export const VinylCard = ({vinyl, generalView}) => {
     const handleEdit = () => {
         navigate(`/details/${vinyl.id}/edit`)
     }
-    const handleDelete = () => {
+    const handleDelete = (e) => {
+        e.preventDefault()
         deleteVinyl(vinyl.id).then(() => {
             navigate(`/collection/${currentUser}`)
+            if (refreshOnClick) {
+                
+                refreshOnClick()
+            }
+            
         })
     }
     const handleLike = (e) => {
@@ -103,7 +109,8 @@ export const VinylCard = ({vinyl, generalView}) => {
                         handleTrade={handleTrade} 
                         currentUser={currentUser} 
                         likes={likes} 
-                        handleClick={handleClick}/>
+                        handleClick={handleClick}
+                        refreshOnClick={refreshOnClick}/>
                 </PopoverBody>
             </Popover>
         }

@@ -8,6 +8,7 @@ import {motion} from 'framer-motion'
 export const UsersVinyl = ({currentUser}) => {
     const [usersVinyl, setUsersVinyl] = useState([])
     const {userId} = useParams()
+    const [handleRefresh, setHandleRefresh] = useState(false)
     const navigate = useNavigate()
     useEffect(() => {
         getVinylByUser(userId).then(res =>{
@@ -15,7 +16,10 @@ export const UsersVinyl = ({currentUser}) => {
         }
 
         )
-    }, [userId])
+    }, [userId, handleRefresh])
+    const refreshOnClick = () => {
+        setHandleRefresh(prev => !prev)
+    }
     const handleAddToCollection = (event) => {
         event.preventDefault()
         navigate('/NewVinyl')
@@ -31,7 +35,7 @@ export const UsersVinyl = ({currentUser}) => {
             </div>
             <div className="collection-container justify-content-center border p-2 row">
                 {usersVinyl?.map(vinyl => (
-                    <VinylCard vinyl={vinyl} key={vinyl.id} generalView={true}/>
+                    <VinylCard vinyl={vinyl} key={vinyl.id} refreshOnClick={refreshOnClick} generalView={true}/>
                 ))}
             </div>
         </motion.div>  
