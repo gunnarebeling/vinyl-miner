@@ -10,7 +10,7 @@ export const VinylPopover = ({likesCount, vinyl, handleEdit, handleDelete, handl
     }, [likes, currentUser])
     return (
         <div className="popover-details">
-             <div className="mx-1 d-flex align-items-center m-1"><span className="popover-details">user: </span><span onClick={handleClick}className="custom-link  nav-link name px-1">{vinyl.user?.fullName}</span></div>
+             <div className="mx-1 d-flex align-items-center m-1"><span className="popover-details">Owner: </span><span onClick={handleClick}className="custom-link  nav-link name px-1">{vinyl.user?.fullName}</span></div>
             <div className="mx-1 m-1"><span className="popover-details">condition: {vinyl.condition?.name}</span></div>
             {(vinyl.userId === parseInt(currentUser)) ? 
                 <div><button className='m-2 btn btn-primary' 

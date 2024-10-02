@@ -5,7 +5,7 @@ import { UserContext } from "../../views/ApplicationViews"
 import './VinylCard.css'
 import { deleteVinyl } from "../../services/vinylServices"
 import { getLikesByVinylId, postLike, UpdateLike } from "../../services/likesServices"
-import { OverlayTrigger, Popover } from "react-bootstrap"
+import { OverlayTrigger, Popover, PopoverBody, PopoverHeader } from "react-bootstrap"
 import { VinylPopover } from "./VinylPopover"
 
 
@@ -14,16 +14,14 @@ export const VinylCard = ({vinyl, generalView}) => {
     const [likes, setLikes] = useState([])
     const [likesCount, setLikesCount] = useState(0)
     const {currentUser} = useContext(UserContext)
+    const [showPopover, setShowPopover] = useState(false);
     const navigate = useNavigate()
     const getAndSetLikes = () => {
         getLikesByVinylId(vinyl.id).then(res => {
             setLikes(res)
         })
     }
-    useEffect(() => {
-        const popoverTriggerList = document.querySelectorAll('[data-bs-toggle="popover"]');
-        const popoverList = [...popoverTriggerList].map(popoverTriggerEl => new bootstrap.Popover(popoverTriggerEl));
-      }, []);
+    
     useEffect(() => {
         getAndSetLikes()
     }, [vinyl])
@@ -34,7 +32,7 @@ export const VinylCard = ({vinyl, generalView}) => {
     }, [likes])
     const handleClick = (event) => {
         event.preventDefault()
-        navigate(`/profile/${vinyl.user.id}`)
+        navigate(`/collection/${vinyl.user.id}`)
     }
     const handleShowDetails = () => {
         navigate(`/details/${vinyl.id}`)
@@ -67,17 +65,51 @@ export const VinylCard = ({vinyl, generalView}) => {
     const handleTrade = () =>{
         navigate(`/tradeform/${vinyl.id}`)
     }
+
+    const handleTogglePopover = (e) => {
+        e.preventDefault();
+        setShowPopover(!showPopover); // Toggle the popover manually
+      };
+    
+    
+      const handleClickInsidePopover = (e) => {
+        e.stopPropagation(); // Prevent closing the popover on clicking inside
+      };
     
     return (
         <OverlayTrigger
+        show={showPopover}
         trigger='click'
-        placement="right"
+        placement="auto"
+        rootClose={true} // Allow popover to close when clicking outside
+        rootCloseEvent="click" // Specific event to listen for outside clicks
+        onToggle={() => setShowPopover(false)} // Ensure closing when clicking outside
         overlay={
-            <Popover id="popover-basic">
-                <VinylPopover vinyl={vinyl} handleDelete={handleDelete} likesCount={likesCount} handleEdit={handleEdit} handleLike={handleLike} handleTrade={handleTrade} currentUser={currentUser} likes={likes} handleClick={handleClick}/>
+            <Popover id="popover-basic" onClick={handleClickInsidePopover}>
+                <PopoverHeader className="popover-details" as="h3">{vinyl.albumName}</PopoverHeader>
+                <PopoverBody>
+                    <VinylPopover 
+                        vinyl={vinyl} 
+                        handleDelete={handleDelete} 
+                        likesCount={likesCount} 
+                        handleEdit={handleEdit} 
+                        handleLike={handleLike} 
+                        handleTrade={handleTrade} 
+                        currentUser={currentUser} 
+                        likes={likes} 
+                        handleClick={handleClick}/>
+                </PopoverBody>
             </Popover>
-        }>
-            <section className=" bg-secondary vinyl-card  m-3 border">
+        }
+        
+        >
+            <section className=" bg-secondary vinyl-card  m-3 border" onClick={handleTogglePopover} >
+                <a
+                href="#"
+                role="button"
+                tabIndex="0"
+                onClick={(e) => e.preventDefault()}  
+                >
                 <div className={`shadow d-inline-blick ${generalView && "vinyl"} `}>
                     <div>
                         <img src={`${vinyl.albumArt}`} alt={`album art`} className="img-fluid custom-img fixed-size"/>
@@ -115,6 +147,7 @@ export const VinylCard = ({vinyl, generalView}) => {
                     </div>
                 </div>
 
+            </a>
             </section>
         
         </OverlayTrigger>
