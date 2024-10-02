@@ -15,12 +15,19 @@ export const VinylCard = ({vinyl, generalView}) => {
     const [likesCount, setLikesCount] = useState(0)
     const {currentUser} = useContext(UserContext)
     const [showPopover, setShowPopover] = useState(false);
+    const [liked , setLiked] = useState(false)
     const navigate = useNavigate()
     const getAndSetLikes = () => {
         getLikesByVinylId(vinyl.id).then(res => {
             setLikes(res)
         })
     }
+    useEffect(() => {
+        const filteredLikes = likes.find(like => like.userId === currentUser)
+        
+            setLiked(filteredLikes?.liked)
+        
+    }, [likes, currentUser])
     
     useEffect(() => {
         getAndSetLikes()
@@ -34,9 +41,7 @@ export const VinylCard = ({vinyl, generalView}) => {
         event.preventDefault()
         navigate(`/collection/${vinyl.user.id}`)
     }
-    const handleShowDetails = () => {
-        navigate(`/details/${vinyl.id}`)
-    }
+    
     const handleEdit = () => {
         navigate(`/details/${vinyl.id}/edit`)
     }
@@ -45,8 +50,9 @@ export const VinylCard = ({vinyl, generalView}) => {
             navigate(`/collection/${currentUser}`)
         })
     }
-    const handleLike = () => {
-        
+    const handleLike = (e) => {
+        e.preventDefault()
+        e.stopPropagation()
         const likeObj = likes.find(like => like.userId == currentUser)
         if (likeObj) {
             UpdateLike(likeObj).then(()=> getAndSetLikes())
@@ -68,12 +74,12 @@ export const VinylCard = ({vinyl, generalView}) => {
 
     const handleTogglePopover = (e) => {
         e.preventDefault();
-        setShowPopover(!showPopover); // Toggle the popover manually
+        setShowPopover(!showPopover); 
       };
     
     
       const handleClickInsidePopover = (e) => {
-        e.stopPropagation(); // Prevent closing the popover on clicking inside
+        e.stopPropagation(); 
       };
     
     return (
@@ -81,9 +87,9 @@ export const VinylCard = ({vinyl, generalView}) => {
         show={showPopover}
         trigger='click'
         placement="auto"
-        rootClose={true} // Allow popover to close when clicking outside
-        rootCloseEvent="click" // Specific event to listen for outside clicks
-        onToggle={() => setShowPopover(false)} // Ensure closing when clicking outside
+        rootClose={true} 
+        rootCloseEvent="click" 
+        onToggle={() => setShowPopover(false)} 
         overlay={
             <Popover id="popover-basic" onClick={handleClickInsidePopover}>
                 <PopoverHeader className="popover-details" as="h3">{vinyl.albumName}</PopoverHeader>
@@ -117,7 +123,7 @@ export const VinylCard = ({vinyl, generalView}) => {
                     </div> 
                     <div className="release-details d-flex flex-column ">
                         <div className="info ">
-                            <div className="mx-1 d-flex justify-content-between  mb-1"><span >{vinyl.albumName}</span><span className="me-1 " style={{ whiteSpace: 'nowrap' }}><span>{likesCount}</span><span className="ms-1"><i className={` fa-solid  fa-heart likes-icon`}></i></span></span></div>
+                            <div className="mx-1 d-flex justify-content-between  mb-1"><span >{vinyl.albumName}</span><span className="me-1 " style={{ whiteSpace: 'nowrap'  }}><span>{likesCount}</span><span className="ms-1 "  onClick={handleLike}  ><i style={{ color: liked ? 'rgba(212, 94, 94, 0.482)' : 'rgba(0, 0, 0, 0.482)'}} className={` fa-solid  fa-heart likes-icon`}></i></span></span></div>
                             <div className="mx-1 mb-1"><span >{vinyl?.artist}</span></div>
                             <div className="mx-1 mb-1"><span>{vinyl.genre?.name}</span></div>
                             

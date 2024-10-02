@@ -74,7 +74,7 @@ export const NewTrade = () => {
                 </select>
             </div>
             
-                <div className="container trade-container border  mt-5">
+                <div className="container trade-container   mt-5">
                 <TradeInfo tradeInitVinyl={tradeInitVinyl} tradeOfferVinyl={tradeOfferVinyl}/>
             
                 <div className="text-center m-3">

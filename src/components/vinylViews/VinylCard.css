@@ -31,7 +31,8 @@
     color: black;
 }
 .likes-icon{
-    color: rgba(212, 94, 94, 0.482);
+    /* color: rgba(212, 94, 94, 0.482); */
+    color: rgba(0, 0, 0, 0.188);
 }
 
 .likes-onvinyl{

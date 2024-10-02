@@ -1,10 +1,11 @@
-import { useEffect, useReducer, useState } from "react"
+import { useContext, useEffect, useReducer, useState } from "react"
 import { formReducer } from "../../services/reduceServices"
 import { getVinylById, updateVinyl } from "../../services/vinylServices"
 import { useNavigate, useParams } from "react-router-dom"
 import { getGenres } from "../../services/genreService"
 import { getConditions } from "../../services/conditionsservices"
 import "./forms.css"
+import { UserContext } from "../../views/ApplicationViews"
 
 
 export const EditVinylForm = () => {
@@ -14,6 +15,7 @@ export const EditVinylForm = () => {
     const [conditions, setConditions] = useState([])
     const {vinylId} = useParams()
     const navigate = useNavigate()
+    const {currentUser} =useContext(UserContext)
     useEffect(() => {
         getVinylById(vinylId).then(res => {
             setVinyInfo(res)
@@ -41,7 +43,7 @@ export const EditVinylForm = () => {
             userId: editedVinyl.userId
         }
         updateVinyl(copy)
-        navigate(`/details/${vinylId}`)
+        navigate(`/collection/${currentUser}`)
     }
 
     return (

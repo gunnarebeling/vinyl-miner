@@ -2,6 +2,7 @@
 import { useEffect, useState } from "react"
 import { useNavigate, useParams } from "react-router-dom"
 import { getUserById } from "../../services/userService"
+import {motion} from 'framer-motion'
 
 export const Profile = ({currentUser}) => {
     const [user, setUser] = useState({})
@@ -19,7 +20,10 @@ export const Profile = ({currentUser}) => {
         
     }
     return (
-        <>
+        <motion.div
+            initial={{opacity:0}}
+            animate={{opacity: 1}}
+            transition={{duration: .3}}>
             <div className="header text-center  m-3">
                 {parseInt(userId) === currentUser ? <header className="bodoni-moda-sc-title">My Profile</header> : <header className="bodoni-moda-sc-title">{user?.fullName}'s Profile</header>}
             </div>
@@ -48,6 +52,6 @@ export const Profile = ({currentUser}) => {
                 </div>
             </div>
             
-        </>
+        </motion.div>
     )
 }

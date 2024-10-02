@@ -11,6 +11,8 @@ import { VinylDetails } from "../components/vinylViews/VinylDetails"
 import { NewTrade } from "../components/Forms/NewTrade"
 import { TradesHomeView } from "../components/trades/tradesHomeview"
 
+
+
 export const UserContext = createContext()
 export const ApplicationViews = () => {
     const [currentUser, setCurrentUser]= useState(0)
@@ -29,7 +31,11 @@ export const ApplicationViews = () => {
                     element={
                         <>
                             <NavBar currentUser={currentUser}/>
-                            <Outlet/>
+                                
+                                <div>
+                                    <Outlet/>
+                                </div>
+                                
                         </>
                     }>
                         <Route index element={<AllVinyl/>}/>
