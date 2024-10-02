@@ -3,18 +3,16 @@
 }
 .info-section{
     font-size: calc(1.1vw + 1.1vh);
-    
-    
 }
 .image-container img {
     object-fit: contain;
-    width: 100%; /* Ensure the image takes up the full width of its container */
-    height: 300px; /* Set a fixed height */
+    width: 100%; 
+    height: 300px; 
 }
 .vinyls-container {
-    /* background-color: var(--bs-secondary); */
+   
     display: flex;
-    justify-content: space-between; /* Distributes items with space between them */
+    justify-content: space-between; 
     flex-grow: 1;
 
 }
@@ -23,9 +21,9 @@
     background-color:var(--bs-primary);
 }
 .name {
-    display: inline-block;  /* Allow width to be set */
-    max-width: 150px;      /* Set a max width as needed */
-    overflow: hidden;      /* Hide overflow content */
-    white-space: nowrap;    /* Prevent wrapping to a new line */
-    text-overflow: ellipsis; /* Add ellipsis for overflowing text */
+    display: inline-block;  
+    max-width: 150px;      
+    overflow: hidden;      
+    white-space: nowrap;    
+    text-overflow: ellipsis;
 }

@@ -108,42 +108,21 @@ export const VinylCard = ({vinyl, generalView}) => {
                 href="#"
                 role="button"
                 tabIndex="0"
+                className="text-decoration-none"
                 onClick={(e) => e.preventDefault()}  
                 >
-                <div className={`shadow d-inline-blick ${generalView && "vinyl"} `}>
+                <div className={` vinyl `}>
                     <div>
                         <img src={`${vinyl.albumArt}`} alt={`album art`} className="img-fluid custom-img fixed-size"/>
                     </div> 
                     <div className="release-details d-flex flex-column ">
                         <div className="info ">
-                            <div className="mx-1 mb-1"><span >{vinyl.albumName}</span></div>
+                            <div className="mx-1 d-flex justify-content-between  mb-1"><span >{vinyl.albumName}</span><span className="me-1 " style={{ whiteSpace: 'nowrap' }}><span>{likesCount}</span><span className="ms-1"><i className={` fa-solid  fa-heart likes-icon`}></i></span></span></div>
                             <div className="mx-1 mb-1"><span >{vinyl?.artist}</span></div>
                             <div className="mx-1 mb-1"><span>{vinyl.genre?.name}</span></div>
-                            {!generalView &&
-                            <div className="mx-1 mb-1"><span>condition: {vinyl.condition?.name}</span></div>
                             
-                            }
-                            <div className="mx-1 mb-1"><span>user: <span onClick={handleClick}className="custom-link nav-link name px-1">{vinyl.user?.fullName}</span></span></div>
-                            {!generalView &&
-                            
-                            <div className="mx-1 mb-1"><span>Likes: {likesCount}</span></div>
-                            
-                            }
                         </div>
-                    {generalView ?
-                        (""
-                        )
-                        
-                        : (<div className='btn-container text-center mt-auto' >
-                            {(vinyl.userId === parseInt(currentUser)) ? <div><button className='m-2 btn btn-primary' onClick={handleEdit}>edit</button> <button className='m-2 btn btn-warning' onClick={handleDelete}>Delete</button></div> 
-                            : 
-                            <div>
-                                <button className='m-2 btn btn-primary' onClick={handleLike}>like</button><button className='m-2 btn btn-warning' onClick={handleTrade}>Trade</button>
-                            </div> }
-                            
-                        
-                            </div>)
-                        }
+                    
                     </div>
                 </div>
 
