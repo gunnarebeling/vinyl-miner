@@ -19,3 +19,14 @@
 .btn{
     max-height: 55px;
 }
+
+.like-icon{
+    color:red;
+    
+}
+.popover-details{
+    color: black;
+}
+.likes-count{
+    color: black;
+}

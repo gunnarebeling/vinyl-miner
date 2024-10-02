@@ -5,6 +5,8 @@ import { UserContext } from "../../views/ApplicationViews"
 import './VinylCard.css'
 import { deleteVinyl } from "../../services/vinylServices"
 import { getLikesByVinylId, postLike, UpdateLike } from "../../services/likesServices"
+import { OverlayTrigger, Popover } from "react-bootstrap"
+import { VinylPopover } from "./VinylPopover"
 
 
 export const VinylCard = ({vinyl, generalView}) => {
@@ -67,47 +69,55 @@ export const VinylCard = ({vinyl, generalView}) => {
     }
     
     return (
-        <section className=" bg-secondary vinyl-card  m-3 border">
-            <div className={`shadow d-inline-blick ${generalView && "vinyl"}  ` } data-bs-toggle="popover" title="Popover title" data-bs-content="And here's some amazing content. It's very engaging. Right?">
-                <div>
-                    <img src={`${vinyl.albumArt}`} alt={`album art`} className="img-fluid custom-img fixed-size"/>
-                </div> 
-                <div className="release-details d-flex flex-column ">
-                    <div className="info ">
-                        <div className="mx-1 mb-1"><span >{vinyl.albumName}</span></div>
-                        <div className="mx-1 mb-1"><span >{vinyl?.artist}</span></div>
-                        <div className="mx-1 mb-1"><span>{vinyl.genre?.name}</span></div>
-                        {!generalView &&
-                        <div className="mx-1 mb-1"><span>condition: {vinyl.condition?.name}</span></div>
+        <OverlayTrigger
+        trigger='click'
+        placement="right"
+        overlay={
+            <Popover id="popover-basic">
+                <VinylPopover vinyl={vinyl} handleDelete={handleDelete} likesCount={likesCount} handleEdit={handleEdit} handleLike={handleLike} handleTrade={handleTrade} currentUser={currentUser} likes={likes} handleClick={handleClick}/>
+            </Popover>
+        }>
+            <section className=" bg-secondary vinyl-card  m-3 border">
+                <div className={`shadow d-inline-blick ${generalView && "vinyl"} `}>
+                    <div>
+                        <img src={`${vinyl.albumArt}`} alt={`album art`} className="img-fluid custom-img fixed-size"/>
+                    </div> 
+                    <div className="release-details d-flex flex-column ">
+                        <div className="info ">
+                            <div className="mx-1 mb-1"><span >{vinyl.albumName}</span></div>
+                            <div className="mx-1 mb-1"><span >{vinyl?.artist}</span></div>
+                            <div className="mx-1 mb-1"><span>{vinyl.genre?.name}</span></div>
+                            {!generalView &&
+                            <div className="mx-1 mb-1"><span>condition: {vinyl.condition?.name}</span></div>
+                            
+                            }
+                            <div className="mx-1 mb-1"><span>user: <span onClick={handleClick}className="custom-link nav-link name px-1">{vinyl.user?.fullName}</span></span></div>
+                            {!generalView &&
+                            
+                            <div className="mx-1 mb-1"><span>Likes: {likesCount}</span></div>
+                            
+                            }
+                        </div>
+                    {generalView ?
+                        (""
+                        )
                         
+                        : (<div className='btn-container text-center mt-auto' >
+                            {(vinyl.userId === parseInt(currentUser)) ? <div><button className='m-2 btn btn-primary' onClick={handleEdit}>edit</button> <button className='m-2 btn btn-warning' onClick={handleDelete}>Delete</button></div> 
+                            : 
+                            <div>
+                                <button className='m-2 btn btn-primary' onClick={handleLike}>like</button><button className='m-2 btn btn-warning' onClick={handleTrade}>Trade</button>
+                            </div> }
+                            
+                        
+                            </div>)
                         }
-                        <div className="mx-1 mb-1"><span>user: <span onClick={handleClick}className="custom-link nav-link name px-1">{vinyl.user?.fullName}</span></span></div>
-                        {!generalView &&
-                        
-                        <div className="mx-1 mb-1"><span>Likes: {likesCount}</span></div>
-                        
-                        }
-                     </div>
-                {generalView ?
-                    (<div className='btn-container text-center mt-auto'>
-                        <button className='m-2 btn btn-primary'onClick={handleShowDetails}>Show Details</button>
                     </div>
-                    )
-                    
-                     : (<div className='btn-container text-center mt-auto' >
-                        {(vinyl.userId === parseInt(currentUser)) ? <div><button className='m-2 btn btn-primary' onClick={handleEdit}>edit</button> <button className='m-2 btn btn-warning' onClick={handleDelete}>Delete</button></div> 
-                        : 
-                        <div>
-                            <button className='m-2 btn btn-primary' onClick={handleLike}>like</button><button className='m-2 btn btn-warning' onClick={handleTrade}>Trade</button>
-                        </div> }
-                        
-                       
-                    </div>)
-                    }
-            </div>
-        </div>
+                </div>
 
-        </section>
+            </section>
+        
+        </OverlayTrigger>
             
     )
 }
