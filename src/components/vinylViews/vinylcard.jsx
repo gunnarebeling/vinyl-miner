@@ -68,7 +68,7 @@ export const VinylCard = ({vinyl, generalView}) => {
     
     return (
         <section className=" bg-secondary vinyl-card  m-3 border">
-            <div className={`shadow d-inline-blick ${generalView && "vinyl"} `}>
+            <div className={`shadow d-inline-blick ${generalView && "vinyl"}  ` } data-bs-toggle="popover" title="Popover title" data-bs-content="And here's some amazing content. It's very engaging. Right?">
                 <div>
                     <img src={`${vinyl.albumArt}`} alt={`album art`} className="img-fluid custom-img fixed-size"/>
                 </div> 
