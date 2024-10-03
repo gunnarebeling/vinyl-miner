@@ -2,6 +2,8 @@ import { useEffect, useReducer, useState } from "react"
 import { getUserById, updateUser } from "../../services/userService"
 import { useNavigate } from "react-router-dom"
 import { formReducer } from "../../services/reduceServices"
+import { UploadWidget } from "../photoupload/UploadWidget"
+import { ProfileImg } from "../photoupload/ProfileImg"
 
 export const EditProfile = ({currentUser}) => {
     const [userInfo, setUserInfo] = useState({})
@@ -15,7 +17,7 @@ export const EditProfile = ({currentUser}) => {
         })
     }, [currentUser])
     useEffect(() => {
-        if(Object.keys(userInfo) !== 0){
+        if(userInfo){
            dispatch({type: 'setNewInfo', payload: userInfo})
 
         }
@@ -26,7 +28,8 @@ export const EditProfile = ({currentUser}) => {
         let copy = {
             id: newInfo.id,
             fullName: newInfo.fullName,
-            email: newInfo.email
+            email: newInfo.email,
+            profileImage: newInfo.profileImage
 
         }
         updateUser(copy)
@@ -42,6 +45,9 @@ export const EditProfile = ({currentUser}) => {
                 <header>Edit Profile</header>
             </div>
             <div className="d-flex justify-content-center p-3 ">
+                    <div>
+                        <UploadWidget dispatch={dispatch}/>
+                    </div>
                 <form className="form-container container bg-secondary rounded border  m-4 ">
                     <fieldset className="border-bottom">
                         <header className="text-decoration-underline m-3 h3">Full Name</header>
@@ -78,6 +84,7 @@ export const EditProfile = ({currentUser}) => {
                         <button className="btn btn-primary m-3" onClick={handelSubmit}>Submit</button>
                     </fieldset>
                 </form>
+                <ProfileImg profileImage={newInfo.profileImage} alt="profile image"/>
             </div>
         </div>
     )

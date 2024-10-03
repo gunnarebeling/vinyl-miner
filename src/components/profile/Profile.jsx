@@ -3,6 +3,7 @@ import { useEffect, useState } from "react"
 import { useNavigate, useParams } from "react-router-dom"
 import { getUserById } from "../../services/userService"
 import {motion} from 'framer-motion'
+import { ProfileImg } from "../photoupload/ProfileImg"
 
 export const Profile = ({currentUser}) => {
     const [user, setUser] = useState({})
@@ -32,6 +33,7 @@ export const Profile = ({currentUser}) => {
                     <div className=" ">
                         <p className="h3 text-decoration-underline">Name</p>
                         <h1 className="h3 ">{user.fullName}</h1>
+                        <ProfileImg profileImage={user?.profileImage}/>
                     </div>
                     {parseInt(userId) === currentUser && 
                         <div className="email">
