@@ -5,16 +5,17 @@
 .nav-link{
     font-size: medium;
     font-family: "Bodoni Moda SC", serif;
-    color: var(--bs-primary);
+    color: white;
     text-decoration: none;
 
 }
 
 .nav-link:visited {
-    color: rgba(204, 78, 204, 0.713) !important;
+    color:white;
 }
 .nav-link:hover{
     text-decoration: none !important;
     font-size: 1.2rem; 
     transition: font-size 0.3s ease;
+    color: rgb(232, 191, 233);
 }

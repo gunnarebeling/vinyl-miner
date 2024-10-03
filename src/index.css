@@ -149,12 +149,12 @@ table {
 }
 
 .custom-link {
-  color: rgba(227, 135, 227, 0.713); /* Default link color */
+  /* color: rgba(227, 135, 227, 0.713); Default link color */
   cursor: pointer;
 }
 
 .custom-link:hover {
-  color: rgba(180, 108, 180, 0.704); /* Color on hover */
+  /* color: rgba(180, 108, 180, 0.704); Color on hover */
   text-decoration: underline;
 }
 
