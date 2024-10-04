@@ -13,6 +13,7 @@ import { Position } from "@cloudinary/url-gen/qualifiers/position";
 import { png } from "@cloudinary/url-gen/qualifiers/format";
 import { focusOn, compass } from "@cloudinary/url-gen/qualifiers/gravity";
 import { face } from "@cloudinary/url-gen/qualifiers/focusOn";
+import { removeBackground } from '@cloudinary/url-gen/actions/effect';
 
 export const ProfileImg = ({profileImage}) => {
     const cld = new Cloudinary({
@@ -20,10 +21,12 @@ export const ProfileImg = ({profileImage}) => {
           cloudName: 'dt2kpy8ox'
         }
       }); 
-      const myImage = cld.image(profileImage).resize(thumbnail().width(150).height(150).gravity(focusOn(face())));
+      const myImage = cld.image(profileImage).resize(thumbnail().width(100).height(100).gravity(focusOn(face())));
     return (
-        <div>
-            <AdvancedImage cldImg={myImage}/>
+        <div className='' style={{ width: '100px', 
+          height: '100px', borderRadius: '50%',  overflow: 'hidden' }} >
+            <AdvancedImage cldImg={myImage} alt="User Avatar"  style={{width: '100%', height: '100%', objectFit: 'cover'}}/>
         </div>
     )
 }
+

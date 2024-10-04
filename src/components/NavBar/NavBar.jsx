@@ -1,7 +1,17 @@
 import { Link, useNavigate } from "react-router-dom"
 import './NavBar.css'
+import { useEffect, useState } from "react"
+import { getUserById } from "../../services/userService"
+import { ProfileImg } from "../photoupload/ProfileImg"
 
 export const NavBar = ({currentUser}) => {
+    const [profilePhoto , setProfilePhote] = useState({})
+    useEffect(() => {
+        getUserById(currentUser).then(res => {
+            
+            setProfilePhote(res[0])
+        })
+    }, [currentUser])
     const navigate = useNavigate()
     return (
         <nav className="navbar nav navbar-dark nav border-bottom navbar-dark align-items-center ">
@@ -20,10 +30,11 @@ export const NavBar = ({currentUser}) => {
                         <Link className="nav-link custom-link" to={`/collection/${currentUser}`} >My Collection</Link>
                     </li>
                     <li className="nav-item">
-                        <Link className="nav-link custom-link" to={`/profile/${currentUser}`} >My Profile</Link>
+                        <Link className="nav-link custom-link" to={`/trades`} >Trades</Link>
                     </li>
                     <li className="nav-item">
-                        <Link className="nav-link custom-link" to={`/trades`} >Trades</Link>
+                        <Link className="nav-link custom-link" to={`/profile/${currentUser}`} >My Profile</Link>
+                        <ProfileImg profileImage={profilePhoto?.profileImage}/>
                     </li>
                 
                     </ul>

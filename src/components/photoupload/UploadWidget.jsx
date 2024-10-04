@@ -17,7 +17,7 @@ export const UploadWidget = ({dispatch}) => {
            
             if (!error && result && result.event === "success") {
                 
-                const uploadedImageUrl = result.info.public_id;
+                const uploadedImageUrl = result.info.public_id || 'emptyAvatar.png';
       
                 dispatch({
                   type: 'handleInput',
