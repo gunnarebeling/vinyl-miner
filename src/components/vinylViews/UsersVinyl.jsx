@@ -4,34 +4,44 @@ import { useNavigate, useParams } from "react-router-dom"
 import { getVinylByUser } from "../../services/vinylServices"
 import { VinylCard } from "./vinylcard"
 import {motion} from 'framer-motion'
+import { ProfileImg } from "../photoupload/ProfileImg"
+import { getUserById } from "../../services/userService"
 
 export const UsersVinyl = ({currentUser}) => {
     const [usersVinyl, setUsersVinyl] = useState([])
     const {userId} = useParams()
     const [handleRefresh, setHandleRefresh] = useState(false)
+    const [user, setUser] = useState({})
     const navigate = useNavigate()
     useEffect(() => {
         getVinylByUser(userId).then(res =>{
             setUsersVinyl(res)
-        }
-
-        )
+        }   
+    )
+    getUserById(userId).then((res => setUser(res[0])))
     }, [userId, handleRefresh])
     const refreshOnClick = () => {
         setHandleRefresh(prev => !prev)
     }
+
     const handleAddToCollection = (event) => {
         event.preventDefault()
         navigate('/NewVinyl')
-
     }
+
     return (
         <motion.div
             initial={{opacity:0}}
             animate={{opacity: 1}}
             transition={{duration: .3}}>
             <div className="header text-center d-flex justify-content-between m-3">
-                {parseInt(userId) === currentUser ? (<><header className="align-self-center bodoni-moda-sc-title mx-auto">My Collection</header> <button className="btn btn-primary" onClick={handleAddToCollection}>+</button></>) : <header className="bodoni-moda-sc-title">{usersVinyl[0]?.user.fullName}'s Collection</header>}
+                {parseInt(userId) === currentUser ? 
+                (<><header className=" d-flex bodoni-moda-sc-title ">My Collection </header> 
+                    <button className="btn btn-outline-primary" onClick={handleAddToCollection}>+</button></>) : 
+                <header className=" d-flex align-items-center bodoni-moda-sc-title">
+                    <span className="m-3"><ProfileImg navPic={true} profileImage={user.profileImage} /></span>
+                    <span className="text-center">{usersVinyl[0]?.user.fullName}'s Collection </span>
+                </header>}
             </div>
             <div className="collection-container justify-content-center border p-2 row">
                 {usersVinyl?.map(vinyl => (

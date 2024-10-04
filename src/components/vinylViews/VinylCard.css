@@ -16,6 +16,39 @@
 .vinyl{
     max-width: 200px;
 }
+@media (max-width: 768px) {
+    .vinyl-card {
+        max-width: 150px; /* Make the card smaller */
+        min-height: 150px; /* Reduce height */
+    }
+    
+    .custom-img {
+        height: 150px; /* Adjust image height */
+    }
+
+    .vinyl {
+        max-width: 150px; /* Reduce the vinyl container width */
+    }
+}
+
+/* Media query for screen widths 576px or smaller (e.g. mobile) */
+@media (max-width: 576px) {
+    .vinyl-card {
+        max-width: 100px;
+        min-height: 100px;
+    }
+    
+    .custom-img {
+        height: 100px;
+    }
+
+    .vinyl {
+        max-width: 100px;
+    }
+    .card-likes{
+        display: none;
+    }
+}
 .btn{
     max-height: 55px;
 }

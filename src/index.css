@@ -202,3 +202,21 @@ header{
   font-family: 'bodoni-moda-sc-title';
 }
 
+.profile-img{
+   width: 100px; 
+    height: 100px; 
+    border-radius: 50%;  
+    overflow: hidden 
+}
+
+.btn-outline-primary{
+  color: var(--bs-primary);
+  border-color: var(--bs-primary) ;
+}
+
+.btn-outline-primary:hover{
+  color: white;
+  border-color: var(--bs-primary) ;
+  background-color: var(--bs-primary);
+
+}

@@ -1,17 +1,19 @@
 import { Link, useNavigate } from "react-router-dom"
 import './NavBar.css'
-import { useEffect, useState } from "react"
+import { useContext, useEffect, useState } from "react"
 import { getUserById } from "../../services/userService"
 import { ProfileImg } from "../photoupload/ProfileImg"
+import { UserContext } from "../../views/ApplicationViews"
 
 export const NavBar = ({currentUser}) => {
-    const [profilePhoto , setProfilePhote] = useState({})
+    const [profilePhoto , setProfilePhoto] = useState({})
+    const {photoSwap} = useContext(UserContext)
     useEffect(() => {
         getUserById(currentUser).then(res => {
             
-            setProfilePhote(res[0])
+            setProfilePhoto(res[0])
         })
-    }, [currentUser])
+    }, [currentUser, photoSwap])
     const navigate = useNavigate()
     return (
         <nav className="navbar nav navbar-dark nav border-bottom navbar-dark align-items-center ">
@@ -22,7 +24,7 @@ export const NavBar = ({currentUser}) => {
 
                 
             <div className=" navbar justify-content-between">
-                <ul className="d-flex  mx-auto">
+                <ul className="d-flex align-items-center mx-auto">
                     <li className="nav-item">
                         <Link className="nav-link custom-link" to='/' >All Vinyl</Link>
                     </li>
@@ -32,28 +34,49 @@ export const NavBar = ({currentUser}) => {
                     <li className="nav-item">
                         <Link className="nav-link custom-link" to={`/trades`} >Trades</Link>
                     </li>
-                    <li className="nav-item">
-                        <Link className="nav-link custom-link" to={`/profile/${currentUser}`} >My Profile</Link>
-                        <ProfileImg profileImage={profilePhoto?.profileImage}/>
+                    <li className="nav-item  align-items-center d-flex">
+                        <div className="dropdown ">
+                            <a className="btn  d-flex align-items-center nav-link custom-link" 
+                                href="#" 
+                                role="button" 
+                                id="profile-dropdown"
+                                data-bs-toggle="dropdown"
+                                aria-expanded="false">
+                                
+                                <ProfileImg profileImage={profilePhoto?.profileImage} navPic={true}/>
+                                
+                            </a>
+                            <ul className="dropdown-menu dropdown-menu-end " aria-labelledby="dropdownMenuLink">
+                                <li>
+                                     <Link className="dropdown-item" to={`/profile/${currentUser}`} >View Profile</Link>
+                                </li>
+                                <li>
+                                    <Link className="dropdown-item" to={`/editprofile`}>Edit Profile</Link>
+                                </li>
+                                <li>
+                                    {localStorage.getItem("vinyl_user") ? (
+                                        <section className="nav-item ms-auto ">
+                                            <Link
+                                            className="dropdown-item"
+                                            to=""
+                                            onClick={() => {
+                                                localStorage.removeItem("vinyl_user")
+                                                navigate("/login", { replace: true })
+                                            }}
+                                            >
+                                            Logout
+                                            </Link>
+                                        </section>
+                                        ) : (
+                                        ""
+                                        )}
+                                </li>
+
+                            </ul>
+                        </div> 
                     </li>
                 
                     </ul>
-                    {localStorage.getItem("vinyl_user") ? (
-                        <li className="nav-item ms-auto">
-                            <Link
-                            className="nav-link"
-                            to=""
-                            onClick={() => {
-                                localStorage.removeItem("vinyl_user")
-                                navigate("/login", { replace: true })
-                            }}
-                            >
-                            Logout
-                            </Link>
-                        </li>
-                        ) : (
-                        ""
-                        )}
             </div>
         </nav>
     )

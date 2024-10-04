@@ -2,7 +2,7 @@
 import { useEffect, useRef } from "react"
 
 
-export const UploadWidget = ({dispatch}) => {
+export const UploadWidget = ({dispatch,register, setUser, user}) => {
     const cloudindaryRef = useRef()
     const widgetRef = useRef()
     
@@ -18,20 +18,28 @@ export const UploadWidget = ({dispatch}) => {
             if (!error && result && result.event === "success") {
                 
                 const uploadedImageUrl = result.info.public_id || 'emptyAvatar.png';
-      
-                dispatch({
-                  type: 'handleInput',
-                  field: "profileImage",
-                  value: uploadedImageUrl
-                });
+                if (register) {
+                  let copy = 
+                  {...user,
+                    profileImage: uploadedImageUrl
+                  }
+                  setUser(copy)
+                }else{
+                  dispatch({
+                    type: 'handleInput',
+                    field: "profileImage",
+                    value: uploadedImageUrl
+                  });
+
+                }
               } else if (error) {
                 console.error("Upload error:", error);
               }
             }
           );
-        }, [dispatch]);
+        }, [dispatch, setUser, user , register]);
     return (
-        <button onClick={() => widgetRef.current?.open()}>Upload Photo</button>
+        <button className=" btn btn-outline-primary mt-3" onClick={() => widgetRef.current?.open()}>{register ? "upload profile pic" : "Change Profile Picture"}</button>
 
 
     )

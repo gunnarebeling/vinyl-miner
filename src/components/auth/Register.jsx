@@ -2,11 +2,13 @@ import { useState } from "react"
 import { useNavigate } from "react-router-dom"
 import "./Login.css"
 import { createUser, getUserByEmail } from "../../services/userService"
+import { UploadWidget } from "../photoupload/UploadWidget"
 
 export const Register = () => {
   const [user, setUser] = useState({
     email: "",
     fullName: "",
+    profileImage: ""
   })
   let navigate = useNavigate()
 
@@ -78,6 +80,9 @@ export const Register = () => {
               required
             />
           </div>
+        </fieldset>
+        <fieldset>
+          <UploadWidget register={true} setUser={setUser} user={user}/>
         </fieldset>
         
         <fieldset className="auth-fieldset">

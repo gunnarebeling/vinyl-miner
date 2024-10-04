@@ -5,15 +5,18 @@ import { getUserById } from "../../services/userService"
 import {motion} from 'framer-motion'
 import { ProfileImg } from "../photoupload/ProfileImg"
 
+
 export const Profile = ({currentUser}) => {
     const [user, setUser] = useState({})
     const {userId} = useParams()
     const navigate = useNavigate()
+    
     useEffect(() => {
         getUserById(userId).then(obj => {
             const userObj = obj[0]
             setUser(userObj)
         })
+       
     }, [userId])
     const handleViewCollection = (event) => {
         event.preventDefault()
@@ -28,31 +31,39 @@ export const Profile = ({currentUser}) => {
             <div className="header text-center  m-3">
                 {parseInt(userId) === currentUser ? <header className="bodoni-moda-sc-title">My Profile</header> : <header className="bodoni-moda-sc-title">{user?.fullName}'s Profile</header>}
             </div>
-            <div className="d-flex justify-content-center">
-                <div className="container bg-secondary rounded border text-center  m-4 ">
-                    <div className=" ">
-                        <p className="h3 text-decoration-underline">Name</p>
-                        <h1 className="h3 ">{user.fullName}</h1>
-                        <ProfileImg profileImage={user?.profileImage}/>
-                    </div>
+            <div className="d-flex mt-5 justify-content-center mb-3">
+                <ProfileImg profileImage={user?.profileImage}/>
+            </div>
+            <div className=" text-center">
+                <h1 className="h3 ">{user.fullName}</h1>
+            </div>
+            <div className="d-flex justify-content-center bg-secondary border mt-5 container align-items-center">
+                <div className="container d-flex flex-column align-items-center rounded  text-center  m-2 ">
                     {parseInt(userId) === currentUser && 
                         <div className="email">
-                            <p className="h3 text-decoration-underline">email</p>
-                            <h1 className="h3">{user.email}</h1>
+                            <p className=" text-decoration-underline">email</p>
+                            <h1 className="">{user.email}</h1>
                         </div>
                     }
-                    <div className="vinyl-amount m-5">
+                    <div className="vinyl-amount mt-4">
                         
                         <h1 className="h3">{user.vinyls?.length} vinyls in collection</h1>
                     </div>
-                    <div className="mb-3">
-                        {parseInt(userId) === currentUser? <button className="btn btn-primary" onClick={(event) => {
-                            event.preventDefault()
-                            navigate('/editprofile')
-                        }}>edit profile</button> : <button className="btn btn-primary" onClick={handleViewCollection}>view collection</button>}
-                    </div>
                 </div>
             </div>
+                    <div className="m-3 text-center">
+                        {parseInt(userId) === currentUser? 
+                            <button 
+                                className="btn btn-outline-primary" 
+                                onClick={(event) => 
+                                    {event.preventDefault()
+                                    navigate('/editprofile')}}
+                            >edit profile</button> : 
+                            <button 
+                                className="btn btn-outline-primary" 
+                                onClick={handleViewCollection}>view collection</button>
+                        }
+                    </div>
             
         </motion.div>
     )

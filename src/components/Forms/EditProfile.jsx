@@ -1,14 +1,16 @@
-import { useEffect, useReducer, useState } from "react"
+import { useContext, useEffect, useReducer, useState } from "react"
 import { getUserById, updateUser } from "../../services/userService"
 import { useNavigate } from "react-router-dom"
 import { formReducer } from "../../services/reduceServices"
 import { UploadWidget } from "../photoupload/UploadWidget"
 import { ProfileImg } from "../photoupload/ProfileImg"
+import { UserContext } from "../../views/ApplicationViews"
 
 export const EditProfile = ({currentUser}) => {
     const [userInfo, setUserInfo] = useState({})
     const [newInfo , dispatch] = useReducer(formReducer, {} ) 
     const navigate = useNavigate()
+    const {setPhotoSwap} = useContext(UserContext)
 
     useEffect(() => {
         getUserById(currentUser).then(res => {
@@ -32,10 +34,16 @@ export const EditProfile = ({currentUser}) => {
             profileImage: newInfo.profileImage
 
         }
-        updateUser(copy)
+        updateUser(copy).then(()=>{
+            setPhotoSwap(prev => !prev)
+            
+        } 
+         ).then(() => {
+            navigate(`/profile/${newInfo.id}`)
+            
+         })
         
         
-        navigate(`/profile/${newInfo.id}`)
     }
     
     
@@ -44,10 +52,11 @@ export const EditProfile = ({currentUser}) => {
             <div className="header text-center m-3">
                 <header>Edit Profile</header>
             </div>
+            <div className="d-flex flex-column justify-content-center align-items-center">
+                <ProfileImg profileImage={newInfo.profileImage} alt="profile image"/>
+                <UploadWidget dispatch={dispatch} register={false}/>
+            </div>
             <div className="d-flex justify-content-center p-3 ">
-                    <div>
-                        <UploadWidget dispatch={dispatch}/>
-                    </div>
                 <form className="form-container container bg-secondary rounded border  m-4 ">
                     <fieldset className="border-bottom">
                         <header className="text-decoration-underline m-3 h3">Full Name</header>
@@ -69,7 +78,8 @@ export const EditProfile = ({currentUser}) => {
                         <header className="text-decoration-underline m-3 h3">Email</header>
                         <input 
                         type="text"
-                        id="email"   
+                        id="email" 
+                        className="mb-3"  
                         value={newInfo.email || ''}
                         onChange={(event) => {
                             const {id , value } = event.target
@@ -81,11 +91,12 @@ export const EditProfile = ({currentUser}) => {
                         }} />
                     </fieldset>
                     <fieldset className="submit-button">
-                        <button className="btn btn-primary m-3" onClick={handelSubmit}>Submit</button>
                     </fieldset>
                 </form>
-                <ProfileImg profileImage={newInfo.profileImage} alt="profile image"/>
             </div>
+                <div className="text-center">
+                    <button className="btn btn-outline-primary m-3" onClick={handelSubmit}>Submit</button>
+                </div>
         </div>
     )
 }

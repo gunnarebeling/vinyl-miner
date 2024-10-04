@@ -43,6 +43,7 @@ export const EditVinylForm = () => {
             userId: editedVinyl.userId
         }
         updateVinyl(copy)
+        
         navigate(`/collection/${currentUser}`)
     }
 

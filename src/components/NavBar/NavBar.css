@@ -19,3 +19,6 @@
     transition: font-size 0.3s ease;
     color: rgb(232, 191, 233);
 }
+.custom-dropdown-menu {
+    margin-left: -20px; /* Adjust this value to move the menu */
+  }

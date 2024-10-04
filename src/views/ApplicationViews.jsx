@@ -16,6 +16,7 @@ import { TradesHomeView } from "../components/trades/tradesHomeview"
 export const UserContext = createContext()
 export const ApplicationViews = () => {
     const [currentUser, setCurrentUser]= useState(0)
+    const [photoSwap, setPhotoSwap] = useState(false)
 
     useEffect(() => {
         const currentUserObj = localStorage.getItem('vinyl_user')
@@ -24,7 +25,7 @@ export const ApplicationViews = () => {
         setCurrentUser(currentUserId)
     }, [])
     return (
-        <UserContext.Provider value={{currentUser}}>
+        <UserContext.Provider value={{currentUser, setPhotoSwap, photoSwap}}>
             <Routes>
                 <Route 
                     path="/"

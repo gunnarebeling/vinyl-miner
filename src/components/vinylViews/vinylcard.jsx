@@ -124,13 +124,27 @@ export const VinylCard = ({vinyl, refreshOnClick}) => {
                 className="text-decoration-none"
                 onClick={(e) => e.preventDefault()}  
                 >
-                <div className={` vinyl `}>
+                <div className='vinyl'>
                     <div>
                         <img src={`${vinyl.albumArt}`} alt={`album art`} className="img-fluid custom-img fixed-size"/>
                     </div> 
                     <div className="release-details d-flex flex-column ">
                         <div className="info ">
-                            <div className="mx-1 d-flex justify-content-between  mb-1"><span >{vinyl.albumName}</span><span className="me-1 " style={{ whiteSpace: 'nowrap'  }}><span>{likesCount}</span><span className="ms-1 "  onClick={handleLike}  ><i style={{ color: liked ? 'rgba(212, 94, 94, 0.482)' : 'rgba(0, 0, 0, 0.482)'}} className={` fa-solid  fa-heart likes-icon`}></i></span></span></div>
+                            <div className="mx-1 d-flex justify-content-between  mb-1">
+                                <span >{vinyl.albumName}</span>
+                                <section 
+                                    className="me-1 card-likes" 
+                                    style={{ whiteSpace: 'nowrap'  }}>
+                                    <span>{likesCount}</span>
+                                    <span className="ms-1 "  
+                                        onClick={handleLike}  >
+                                        <i style={{ color: liked ? 'rgba(212, 94, 94, 0.482)' :
+                                            'rgba(0, 0, 0, 0.482)'}} 
+                                            className={` fa-solid  fa-heart likes-icon`}>
+                                        </i>
+                                    </span>
+                                </section>
+                            </div>
                             <div className="mx-1 mb-1"><span >{vinyl?.artist}</span></div>
                             <div className="mx-1 mb-1"><span>{vinyl.genre?.name}</span></div>
                             
