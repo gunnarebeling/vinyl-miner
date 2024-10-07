@@ -79,3 +79,8 @@
     font-size: 1.2rem; 
     transition: font-size 0.3s ease;
 }
+
+audio {
+    width: 100%; 
+    margin-top: 10px; 
+}

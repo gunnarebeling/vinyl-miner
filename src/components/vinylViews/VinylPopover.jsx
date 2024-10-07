@@ -1,4 +1,6 @@
 import { useEffect, useState } from "react"
+import { AudioPlayer } from "../Playback/AudioPlayer" 
+import './VinylCard.css'
 
 export const VinylPopover = ({likesCount, vinyl, handleEdit, handleDelete, handleLike, handleTrade, currentUser, likes, handleClick}) => {
     const [liked , setLiked] = useState(false)
@@ -12,6 +14,9 @@ export const VinylPopover = ({likesCount, vinyl, handleEdit, handleDelete, handl
         <div className="popover-details">
              <div className="mx-1 d-flex align-items-center m-1"><span className="popover-details">Owner: </span><span onClick={handleClick}className="owner-link name px-1">{vinyl.user?.fullName}</span></div>
             <div className="mx-1 m-1"><span className="popover-details">condition: {vinyl.condition?.name}</span></div>
+            <div><AudioPlayer previewUrl={vinyl.audioSample}/></div>
+            <div>           
+            </div>
             {(vinyl.userId === parseInt(currentUser)) ? 
                 <div><button className='m-2 btn btn-primary' 
                 onClick={handleEdit}>edit</button> 

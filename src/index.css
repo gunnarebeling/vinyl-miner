@@ -220,3 +220,15 @@ header{
   background-color: var(--bs-primary);
 
 }
+.btn-spotify{
+  color: black;
+  background-color: #1ed760 ;
+}
+
+.btn-spotify:hover{
+  color: black;
+  border-color: #1ed760 ;
+  background-color: #1abc54;
+  ;
+
+}

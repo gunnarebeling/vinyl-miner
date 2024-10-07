@@ -3,6 +3,8 @@ import { getGenres } from "../../services/genreService"
 import { getConditions } from "../../services/conditionsservices"
 import { postVinyl } from "../../services/vinylServices"
 import { useNavigate } from "react-router-dom"
+import { searchAlbum } from "../../services/spotifyApi"
+import { VinylCard } from "../vinylViews/vinylcard"
 
 export const NewVinylForm = ({currentUser}) => {
     
@@ -26,11 +28,25 @@ export const NewVinylForm = ({currentUser}) => {
         postVinyl(copy)
         navigate(`/collection/${currentUser}`)
     }
+
+    const handleSpotifySearch =  async (event) => {
+        event.preventDefault()
+       const spotifyResult = await searchAlbum(formValues.artist, formValues.albumName)
+       let copy = {...formValues}
+       copy.albumName = spotifyResult?.albumName
+       copy.artistName = spotifyResult?.artistName 
+       copy.albumArt = spotifyResult?.image
+       copy.audioSample = spotifyResult?.audioSample
+       setFormValues(copy)
+    }
     
     return (
         <div>
             <div className="header text-center m-3">
                 <header>add to collection</header>
+            </div>
+            <div  className="d-flex justify-content-center" style={{display: !formValues.albumName && 'none'}}>
+                <VinylCard vinyl={formValues}/>
             </div>
             <div className="d-flex justify-content-center p-3 ">
                 <form className="form-container container bg-secondary rounded border  m-4 ">
@@ -58,6 +74,11 @@ export const NewVinylForm = ({currentUser}) => {
                             setFormValues(copy)
                         }} />
                     </fieldset>
+                    <div className="search-spotify mt-2">
+                        <fieldset>
+                            <button className="btn btn-spotify pill" onClick={handleSpotifySearch}>search spotify</button>
+                        </fieldset>
+                    </div>
                     <fieldset>
                         <p className="mt-3 h3">Album Art</p>
                         <input 

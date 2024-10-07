@@ -6,6 +6,8 @@ import { getGenres } from "../../services/genreService"
 import { getConditions } from "../../services/conditionsservices"
 import "./forms.css"
 import { UserContext } from "../../views/ApplicationViews"
+import { searchAlbum } from "../../services/spotifyApi"
+import { VinylCard } from "../vinylViews/vinylcard"
 
 
 export const EditVinylForm = () => {
@@ -31,6 +33,17 @@ export const EditVinylForm = () => {
         dispatch({type:'setNewInfo', payload: vinylInfo})
     }, [vinylInfo])
 
+    const handleSpotifySearch =  async (event) => {
+        event.preventDefault()
+       const spotifyResult = await searchAlbum(editedVinyl.artist, editedVinyl.albumName)
+       let copied = {...editedVinyl}
+       copied.albumName = spotifyResult?.albumName
+       copied.artistName = spotifyResult?.artistName 
+       copied.albumArt = spotifyResult?.image
+       copied.audioSample = spotifyResult?.audioSample
+       dispatch({type: 'spotifySearch', copy: copied})
+    }
+
     const handelSubmit = (event) => {
         event.preventDefault()
         const copy = {
@@ -40,6 +53,7 @@ export const EditVinylForm = () => {
             conditionId: editedVinyl.conditionId,
             genreId: editedVinyl.genreId,
             albumArt: editedVinyl.albumArt,
+            audioSample: editedVinyl.audioSample,
             userId: editedVinyl.userId
         }
         updateVinyl(copy)
@@ -52,6 +66,9 @@ export const EditVinylForm = () => {
         <div >
             <div className="header text-center m-3">
                 <header>Edit Vinyl</header>
+            </div>
+            <div className="d-flex justify-content-center">
+                <VinylCard vinyl={editedVinyl}/>
             </div>
             <div className="d-flex justify-content-center p-3 ">
                 <form className="form-container container bg-secondary rounded border  m-4 ">
@@ -88,6 +105,9 @@ export const EditVinylForm = () => {
                             })
                         }} />
                     </fieldset>
+                    <fieldset>
+                            <button className=" mt-2 btn btn-spotify" onClick={handleSpotifySearch}>search spotify</button>
+                        </fieldset>  
                     <hr />
                     <fieldset className=" ">
                         <header className=" mt-3 h3">Album Art</header>
