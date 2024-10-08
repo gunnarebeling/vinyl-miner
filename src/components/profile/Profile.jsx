@@ -4,11 +4,15 @@ import { useNavigate, useParams } from "react-router-dom"
 import { getUserById } from "../../services/userService"
 import {motion} from 'framer-motion'
 import { ProfileImg } from "../photoupload/ProfileImg"
+import { getFollowersbyCurrentUser, getFollowsbyCurrentUser } from "../../services/followServices"
+import { ProfileModal } from "./profileModal"
 
 
 export const Profile = ({currentUser}) => {
     const [user, setUser] = useState({})
     const {userId} = useParams()
+    const [followers, setFollowers] = useState([])
+    const [following, setFollowing] = useState([])
     const navigate = useNavigate()
     
     useEffect(() => {
@@ -18,6 +22,15 @@ export const Profile = ({currentUser}) => {
         })
        
     }, [userId])
+
+    useEffect(() => {
+        getFollowersbyCurrentUser(parseInt(userId)).then(res => {
+            setFollowers(res)
+        })
+        getFollowsbyCurrentUser(parseInt(userId)).then(res => {
+            setFollowing(res)
+        })
+    } , [userId])
     const handleViewCollection = (event) => {
         event.preventDefault()
         navigate(`/collection/${user.id}`)
@@ -36,6 +49,21 @@ export const Profile = ({currentUser}) => {
             </div>
             <div className=" text-center">
                 <h1 className="h3 ">{user.fullName}</h1>
+            </div>
+            <div className="stats d-flex justify-content-center">
+                <div className="followers d-flex text-center flex-column">
+                    <span>{followers.length}</span>
+                    <span><button data-bs-toggle="modal" data-bs-target="#tabModal">followers</button></span>
+                </div>
+                <div className="following d-flex text-center flex-column">
+                    <span>{following.length}</span>
+                    <span><button>following</button></span>
+                </div>
+                <div className="collection d-flex text-center flex-column">
+                    <span>{user.vinyls?.length}</span>
+                    <span><button>collection</button></span>
+                </div>
+                <ProfileModal/>
             </div>
             <div className="d-flex justify-content-center bg-secondary border mt-5 container align-items-center">
                 <div className="container d-flex flex-column align-items-center rounded  text-center  m-2 ">
