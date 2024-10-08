@@ -1,6 +1,18 @@
-export const ProfileModal = () => {
+
+import './ProfileModel.css'
+import { ProfileImg } from '../photoupload/ProfileImg'
+import { useNavigate } from 'react-router-dom'
+
+export const ProfileModal = ({ followerUsers, followingUsers, setFollowers, setFollowing}) => {
+    const navigate= useNavigate()
+    const handleClick = (event) => {
+        event.preventDefault()
+        
+        navigate(`/collection/${event.target.dataset.id}`)
+    }
+       
     return (
-        <div className="modal fade" id="tabModal" tabIndex={-1} aria-labelledby="tabModalLabel" aria-hidden="true">
+        <div className="modal fade" id="tabModal" tabIndex="-1" aria-labelledby="tabModalLabel" aria-hidden="true">
             <div className="modal-dialog">
             <div className="modal-content">
                 <div className="modal-header">
@@ -11,32 +23,43 @@ export const ProfileModal = () => {
                 
                 <ul className="nav nav-tabs" id="myTab" role="tablist">
                     <li className="nav-item" role="presentation">
-                    <button className="nav-link active" id="home-tab" data-bs-toggle="tab" data-bs-target="#home" type="button" role="tab" aria-controls="home" aria-selected="true">
-                        Home
+                    <button className="nav-link active " id="followers-tab" data-bs-toggle="tab" data-bs-target="#followers" type="button" role="tab" aria-controls="followers" aria-selected="true">
+                        followers
                     </button>
                     </li>
                     <li className="nav-item" role="presentation">
-                    <button className="nav-link" id="profile-tab" data-bs-toggle="tab" data-bs-target="#profile" type="button" role="tab" aria-controls="profile" aria-selected="false">
-                        Profile
+                    <button className="nav-link border " id="following-tab" data-bs-toggle="tab" data-bs-target="#following" type="button" role="tab" aria-controls="following-tab" aria-selected="true">
+                        following
                     </button>
                     </li>
-                    <li className="nav-item" role="presentation">
-                    <button className="nav-link" id="contact-tab" data-bs-toggle="tab" data-bs-target="#contact" type="button" role="tab" aria-controls="contact" aria-selected="false">
-                        Contact
-                    </button>
-                    </li>
+                    
                 </ul>
 
                 
                 <div className="tab-content" id="myTabContent">
-                    <div className="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
-                    <p>This is the Home tab content inside the modal.</p>
+                    <div className="tab-pane fade show active" id="followers" role="tabpanel" aria-labelledby="home-tab">
+
                     </div>
-                    <div className="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
-                    <p>This is the Profile tab content inside the modal.</p>
-                    </div>
-                    <div className="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">
-                    <p>This is the Contact tab content inside the modal.</p>
+                    <div className="tab-pane fade" id="following" role="tabpanel" aria-labelledby="following-tab">
+                        {followingUsers.map(user => {
+                            return (
+                                <>
+                                <div className='m-2 d-flex justify-content-between align-items-center'>
+                                    <div className='d-flex align-items-center'>
+                                    <span><ProfileImg profileImage={user?.profileImage} navPic={true}/></span>
+                                    <span className='h5 ms-1'>{user.fullName}</span>
+                                    </div>
+                                    <span className=''>
+                                        <button className='m-2 btn btn-primary'
+                                            data-id ={user.id} 
+                                           onClick={handleClick} >view collection</button> 
+                                        <button className='m-2 btn btn-warning' 
+                                            >unfollow</button>
+                                    </span>
+                                </div>
+                                </>
+                            )
+                        })}
                     </div>
                 </div>
                 </div>
@@ -46,6 +69,5 @@ export const ProfileModal = () => {
             </div>
             </div>
         </div>
-
     )
 }
