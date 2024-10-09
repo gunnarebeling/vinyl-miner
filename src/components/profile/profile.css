@@ -1,0 +1,4 @@
+.stats-buttons{
+    color: var(--bs-primary);
+    cursor: pointer;
+}

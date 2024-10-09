@@ -1,14 +1,28 @@
 
 import './ProfileModel.css'
 import { ProfileImg } from '../photoupload/ProfileImg'
-import { useNavigate } from 'react-router-dom'
+import { useNavigate, useParams } from 'react-router-dom'
+import { deleteFollow } from '../../services/followServices'
+import { useContext } from 'react'
+import { UserContext } from '../../views/ApplicationViews'
 
-export const ProfileModal = ({ followerUsers, followingUsers, setFollowers, setFollowing}) => {
+export const ProfileModal = ({following, followerUsers, followingUsers, setDeleteTrigger}) => {
     const navigate= useNavigate()
+    const {currentUser}= useContext(UserContext)
+    const {userId} = useParams()
     const handleClick = (event) => {
         event.preventDefault()
         
         navigate(`/collection/${event.target.dataset.id}`)
+    }
+    const handleUnfollow = (e) => {
+        const findFollowing = following.find(follow => follow.followedUserId === parseInt(e.target.dataset.id))
+        e.preventDefault()
+        deleteFollow(findFollowing.id).then(()=> {
+            setDeleteTrigger(prev => !prev)
+        })
+            
+   
     }
        
     return (
@@ -16,7 +30,7 @@ export const ProfileModal = ({ followerUsers, followingUsers, setFollowers, setF
             <div className="modal-dialog">
             <div className="modal-content">
                 <div className="modal-header">
-                <h5 className="modal-title" id="tabModalLabel">Tabbed Modal</h5>
+                <h5 className="modal-title" id="tabModalLabel">followers</h5>
                 <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div className="modal-body">
@@ -38,13 +52,10 @@ export const ProfileModal = ({ followerUsers, followingUsers, setFollowers, setF
                 
                 <div className="tab-content" id="myTabContent">
                     <div className="tab-pane fade show active" id="followers" role="tabpanel" aria-labelledby="home-tab">
-
-                    </div>
-                    <div className="tab-pane fade" id="following" role="tabpanel" aria-labelledby="following-tab">
-                        {followingUsers.map(user => {
+                        {followerUsers.map(user => {
                             return (
-                                <>
-                                <div className='m-2 d-flex justify-content-between align-items-center'>
+                              
+                                <div className='m-2 d-flex justify-content-between align-items-center' key={user.id}>
                                     <div className='d-flex align-items-center'>
                                     <span><ProfileImg profileImage={user?.profileImage} navPic={true}/></span>
                                     <span className='h5 ms-1'>{user.fullName}</span>
@@ -53,11 +64,34 @@ export const ProfileModal = ({ followerUsers, followingUsers, setFollowers, setF
                                         <button className='m-2 btn btn-primary'
                                             data-id ={user.id} 
                                            onClick={handleClick} >view collection</button> 
-                                        <button className='m-2 btn btn-warning' 
-                                            >unfollow</button>
                                     </span>
                                 </div>
-                                </>
+                              
+                            )
+                        })}
+                    </div>
+                    <div className="tab-pane fade" id="following" role="tabpanel" aria-labelledby="following-tab">
+                        {followingUsers.map(user => {
+                            return (
+                              
+                                <div className='m-2 d-flex justify-content-between align-items-center' key={user.id}>
+                                    <div className='d-flex align-items-center'>
+                                    <span><ProfileImg profileImage={user?.profileImage} navPic={true}/></span>
+                                    <span className='h5 ms-1'>{user.fullName}</span>
+                                    </div>
+                                    <span className=''>
+                                        <button className='m-2 btn btn-primary'
+                                            data-id ={user.id} 
+                                           onClick={handleClick} >view collection</button> 
+                                        {parseInt(userId) === currentUser &&
+                                            <button className='m-2 btn btn-warning'
+                                                data-id ={user.id} 
+                                            onClick={handleUnfollow}  >unfollow</button>
+                                        
+                                        }
+                                    </span>
+                                </div>
+                              
                             )
                         })}
                     </div>

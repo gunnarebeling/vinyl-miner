@@ -39,7 +39,7 @@ export const VinylCard = ({vinyl, refreshOnClick}) => {
     }, [likes])
     const handleClick = (event) => {
         event.preventDefault()
-        navigate(`/collection/${vinyl.user.id}`)
+        navigate(`/profile/${vinyl.user.id}`)
     }
     
     const handleEdit = () => {

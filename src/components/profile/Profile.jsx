@@ -4,8 +4,9 @@ import { useNavigate, useParams } from "react-router-dom"
 import { getALLUsers, getUserById } from "../../services/userService"
 import {motion} from 'framer-motion'
 import { ProfileImg } from "../photoupload/ProfileImg"
-import { getFollowersbyCurrentUser, getFollowsbyCurrentUser } from "../../services/followServices"
+import { deleteFollow, getFollowersbyCurrentUser, getFollowsbyCurrentUser, postFollow } from "../../services/followServices"
 import { ProfileModal } from "./profileModal"
+import './profile.css'
 
 
 export const Profile = ({currentUser}) => {
@@ -16,14 +17,18 @@ export const Profile = ({currentUser}) => {
     const navigate = useNavigate()
     const [followingUsers , setFollowingUsers] = useState([])
     const [followerUsers , setFollowerUsers] = useState([])
-
+    const [deleteTrigger, setDeleteTrigger] = useState(false)
+    const [followed, setFollowed]=useState(false)
+ 
     useEffect(() => {
         getALLUsers().then(res => {
             let filteredFollowingUsers = []
             let filteredFollowerUsers = []
              res.forEach(user => {
                 if (followers) {
+                    setFollowed(followers.some(follow => follow.followingUserId === currentUser))
                     followers.forEach(follow => {
+
                         if (follow.followingUserId === user.id) {
                             filteredFollowerUsers.push(user)
                         }
@@ -41,6 +46,7 @@ export const Profile = ({currentUser}) => {
             setFollowerUsers(filteredFollowerUsers)
             setFollowingUsers(filteredFollowingUsers)
         })}, [followers, following])
+
     useEffect(() => {
         getUserById(userId).then(obj => {
             const userObj = obj[0]
@@ -56,11 +62,25 @@ export const Profile = ({currentUser}) => {
         getFollowsbyCurrentUser(parseInt(userId)).then(res => {
             setFollowing(res)
         })
-    } , [userId])
+    } , [userId, deleteTrigger, followed])
     const handleViewCollection = (event) => {
         event.preventDefault()
         navigate(`/collection/${user.id}`)
         
+    }
+
+    const handleFollow = () => {
+        const follow = followers.find(follow => follow.followedUserId === parseInt(userId) && follow.followingUserId === currentUser)
+        if (follow){
+            deleteFollow(follow.id)
+        }else{
+            const followObj = {
+                followingUserId: currentUser,
+                followedUserId: parseInt(userId)
+            }
+            postFollow(followObj)
+        }
+        setFollowed(prev => !prev)
     }
 
     const showTab = (tab) => {
@@ -93,24 +113,24 @@ export const Profile = ({currentUser}) => {
             <div className="stats d-flex justify-content-center">
                 <div className="followers d-flex text-center flex-column">
                     <span>{followers.length}</span>
-                    <span><button className="followers-button" data-bs-toggle="modal" data-bs-target="#tabModal" onClick={() => showTab('followers')}>followers</button></span>
+                    <span><span  className="followers-button stats-buttons " data-bs-toggle="modal" data-bs-target="#tabModal" onClick={() => showTab('followers')}>followers</span></span>
                 </div>
-                <div className="following d-flex text-center flex-column">
+                <div className="following d-flex px-2 text-center flex-column">
                     <span>{following.length}</span>
-                    <span><button className="following-button" data-bs-toggle="modal" data-bs-target="#tabModal" onClick={() => showTab('following')}>following</button></span>
+                    <span><span className="following-button stats-buttons " data-bs-toggle="modal" data-bs-target="#tabModal" onClick={() => showTab('following')}>following</span></span>
                 </div>
                 <div className="collection d-flex text-center flex-column">
                     <span>{user.vinyls?.length}</span>
-                    <span><button>collection</button></span>
+                    <span><span className="stats-buttons">collection</span></span>
                 </div>
                 
 
 
-            <ProfileModal userId={userId} followingUsers={followingUsers} followerUsers={followerUsers} setFollowers={setFollowers} setFollowing={setFollowing}/>
+            <ProfileModal followers={followers} following={following} userId={userId} followingUsers={followingUsers} followerUsers={followerUsers} setDeleteTrigger={setDeleteTrigger}/>
                
                 
             </div>
-            <div className="d-flex justify-content-center bg-secondary border mt-5 container align-items-center">
+            <div className="d-flex justify-content-center   mt-5 container align-items-center">
                 <div className="container d-flex flex-column align-items-center rounded  text-center  m-2 ">
                     {parseInt(userId) === currentUser && 
                         <div className="email">
@@ -118,10 +138,7 @@ export const Profile = ({currentUser}) => {
                             <h1 className="">{user.email}</h1>
                         </div>
                     }
-                    <div className="vinyl-amount mt-4">
-                        
-                        <h1 className="h3">{user.vinyls?.length} vinyls in collection</h1>
-                    </div>
+                    
                 </div>
             </div>
                     <div className="m-3 text-center">
@@ -132,9 +149,24 @@ export const Profile = ({currentUser}) => {
                                     {event.preventDefault()
                                     navigate('/editprofile')}}
                             >edit profile</button> : 
+                            <div>
                             <button 
                                 className="btn btn-outline-primary" 
-                                onClick={handleViewCollection}>view collection</button>
+                                onClick={handleViewCollection}>view collection
+                            </button>
+                            <span className="ms-3">
+                                <button 
+                                    className={followed ? 
+                                    "btn btn-primary" :
+                                    "btn btn-outline-primary"} 
+                                    onClick={handleFollow}>
+                                        {followed ? 
+                                        "unfollow" : 
+                                        "follow"}
+                                </button>
+                            </span> 
+                            </div>
+                                
                         }
                     </div>
             
