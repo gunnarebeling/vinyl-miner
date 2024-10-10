@@ -41,9 +41,7 @@ export const EditProfile = ({currentUser}) => {
          ).then(() => {
             navigate(`/profile/${newInfo.id}`)
             
-         })
-        
-        
+         })     
     }
     
     

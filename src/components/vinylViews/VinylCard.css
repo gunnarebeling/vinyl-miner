@@ -18,20 +18,19 @@
 }
 @media (max-width: 768px) {
     .vinyl-card {
-        max-width: 150px; /* Make the card smaller */
-        min-height: 150px; /* Reduce height */
+        max-width: 150px; 
+        min-height: 150px; 
     }
     
     .custom-img {
-        height: 150px; /* Adjust image height */
+        height: 150px; 
     }
 
     .vinyl {
-        max-width: 150px; /* Reduce the vinyl container width */
-    }
+        max-width: 150px; 
 }
 
-/* Media query for screen widths 576px or smaller (e.g. mobile) */
+}
 @media (max-width: 576px) {
     .vinyl-card {
         max-width: 100px;
