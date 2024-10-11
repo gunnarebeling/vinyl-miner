@@ -1,6 +1,6 @@
 # README
 
-<u>SETUP</u>
+SETUP
 </br>
 In order to run this app You will need a mock database to fetch from since it has no backend. the localhost i am fetching from is port:8088 I have another repo in github with a mock database.json  file called vinyl-miner-api. I use json-server package.
 
@@ -8,12 +8,13 @@ I also am using Vite and running it on localhost:5173
 
 once those are running the app should be functional.
 
-<u>PURPOSE</u>
+PURPOSE
 </br>
 As a vinyl collector myself I wanted to create a system that would make logging and organizing my collection way easier while also interacting with other vinyl collectors through means of liking and trading.
 
-<u>Navigate</u>
+NAVIGATE
 </br>
+
 **Viewing and interacting with new vinyl additions**
 </br>
 As a  user, I  want to view other users additions to their collection so that I can interact with them by liking and possibly trading with them.  
@@ -45,12 +46,14 @@ Given that I am viewing an item in another users collection I will not be able t
 
 
 **Filtering through new additions**
+</br>
 As a user I want to be able to filter through all the new additions by genre and text so I can target specific items of my choosing.
 Given I want to only view rock albums  when I change the genre filter only the items with the genre rock will appear.
 Given I want to view a specific artist or album i can search the names that match and the items that match will only appear.
 
 
 **Trading**
+</br>
 As a user I want to be able to trade items in my collection with items in others collections. That way I can further enhance my collection and other users can do the same.
 
 Initiate a trade
