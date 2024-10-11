@@ -4,7 +4,7 @@ import { getConditions } from "../../services/conditionsservices"
 import { postVinyl } from "../../services/vinylServices"
 import { useNavigate } from "react-router-dom"
 import { searchAlbum } from "../../services/spotifyApi"
-import { VinylCard } from "../vinylViews/vinylcard"
+import { VinylCard } from "../vinylViews/vinylCard"
 import { UserContext } from "../../views/ApplicationViews"
 
 export const NewVinylForm = () => {

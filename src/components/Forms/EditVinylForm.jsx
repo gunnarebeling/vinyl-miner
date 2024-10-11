@@ -7,7 +7,7 @@ import { getConditions } from "../../services/conditionsservices"
 import "./forms.css"
 import { UserContext } from "../../views/ApplicationViews"
 import { searchAlbum } from "../../services/spotifyApi"
-import { VinylCard } from "../vinylViews/vinylcard"
+import { VinylCard } from "../vinylViews/vinylCard"
 
 
 export const EditVinylForm = () => {
