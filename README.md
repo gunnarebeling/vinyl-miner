@@ -1,7 +1,7 @@
 # README
 
 <u>SETUP</u>
-</n>
+</br>
 In order to run this app You will need a mock database to fetch from since it has no backend. the localhost i am fetching from is port:8088 I have another repo in github with a mock database.json  file called vinyl-miner-api. I use json-server package.
 
 I also am using Vite and running it on localhost:5173 
@@ -9,25 +9,25 @@ I also am using Vite and running it on localhost:5173
 once those are running the app should be functional.
 
 <u>PURPOSE</u>
-</n>
+</br>
 As a vinyl collector myself I wanted to create a system that would make logging and organizing my collection way easier while also interacting with other vinyl collectors through means of liking and trading.
 
 <u>Navigate</u>
-</n>
+</br>
 **Viewing and interacting with new vinyl additions**
-</n>
+</br>
 As a  user, I  want to view other users additions to their collection so that I can interact with them by liking and possibly trading with them.  
   the user should be able to view all new additions to any users collection.
  Given the current user is logged in when he is on the home page he then will  see  all the new additions .  Given the user wants to see the  details of any vinyl created  by any user. When the user clicks the vinyl element of said vinyl then they will be showen a display of details and options to interact with it.
 
 **Viewing profiles**
-</n>
+</br>
 As a user I want to view other users profiles or my own so that I can interact with specific users.
 Given a user is viewing an addition from another user when they click the name of said user then they will be navigated to said users profile.
 Given the user is viewing a profile they will see information about the user and  be given the option to view his collection. When the user wants to see the viewed users collection then he should be able to navigate to his list of vinyl in his collection.
 
 **Making new additions** 
-</n>
+</br>
 As a user I want to be able to add to my collection so that others and I can view them.
 New Items should show up in my collection when viewed by myself or others. 
 Given I have added a new item to my collection when I view my collection then the new Item I just made should be displayed alongside the rest.
@@ -37,7 +37,7 @@ Given I have just made a new addition to my collection when other users are view
 Given I dont want to hunt down the info on the vinyl or the album art I can try to search spotify for the information by entering the artist and or album title then click search spotify. Then if spotify finds the information it will populate for you to confirm or edit.
 
 **Editing and deleting items from collection**
-</n>
+</br>
 As a user I want the capability to edit or delete any item in my collection. So that I keep my collection current and accurate.
 Items in my collection that are viewed either in my collection or when looking at the details should give the option to edit or delete said item.
 Given I am viewing all items  or just in  my collection when I navigate to the items details then I will  be given the option to delete said item or be able to navigate to a different view to edit the item
@@ -63,12 +63,12 @@ Viewing trade offers from other users
 Given other users have offered to trade for something in my collection I will be able to accept their trade or decline it.
 
 **likes**
-</n>
+</br>
 As a user I want to be able to show my enthusiasm for another users vinyl.
 Given I like an item in someone else's vinyl collection I will be able to click the heart icon that will then add a like to the current vinyl. Then the total number of likes that is displayed next to the icon will increment. If I press the icon again it will remove that like and decrement the count.
 
 **followers**
-</n>
+</br>
 As a user I want to be able to follow my favorite Collectors so I can easly view there collection.
 Given I am viewing a users collection I will be able to follow that user by clicking the follow button by said users name. Then that user will be added to my followers list which I can view in my profile page.
 
