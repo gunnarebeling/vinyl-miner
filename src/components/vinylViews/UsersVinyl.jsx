@@ -2,7 +2,7 @@
 import { useContext, useEffect, useState } from "react"
 import { useNavigate, useParams } from "react-router-dom"
 import { getVinylByUser } from "../../services/vinylServices"
-import { VinylCard } from "./vinylCard"
+import { VinylCard } from "./vinylcard"
 import {motion} from 'framer-motion'
 import { ProfileImg } from "../photoupload/ProfileImg"
 import { getUserById } from "../../services/userService"

@@ -1,5 +1,5 @@
 
-import { VinylCard } from "../vinylViews/vinylCard"
+import { VinylCard } from "../vinylViews/vinylcard"
 import "./trades.css"
 
 export const TradeInfo = ({tradeInitVinyl, tradeOfferVinyl} ) => {

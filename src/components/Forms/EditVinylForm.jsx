@@ -7,7 +7,7 @@ import { getConditions } from "../../services/conditionsservices"
 import "./forms.css"
 import { UserContext } from "../../views/ApplicationViews"
 import { searchAlbum } from "../../services/spotifyApi"
-import { VinylCard } from "../vinylViews/vinylCard"
+import { VinylCard } from "../vinylViews/vinylcard"
 
 
 export const EditVinylForm = () => {
@@ -155,10 +155,11 @@ export const EditVinylForm = () => {
                     </fieldset>
                     <hr />
                     <fieldset className=" ">
-                        <header className=" mt-3 h3">Condition</header>
+                        <header className=" mt-3  h3">Condition</header>
                         <select 
                             name="condition"
                             id="conditionId"
+                            className="mb-3"
                             value={editedVinyl.conditionId || ''}
                             onChange={(event) =>{
                                 const {id, value} = event.target
@@ -183,9 +184,9 @@ export const EditVinylForm = () => {
                     </fieldset>
                 </form>
             </div>
-                    <fieldset className="submit-button text-center">
-                        <button className="btn btn-primary  m-3" onClick={handelSubmit}>Submit</button>
-                    </fieldset>
+            <div className="submit-button mb-3 text-center">
+                <button className="btn btn-primary  mb-3" onClick={handelSubmit}>Submit</button>
+            </div>
         </div>
     )
 }

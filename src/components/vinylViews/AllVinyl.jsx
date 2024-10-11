@@ -3,7 +3,7 @@ import './Vinyl.css'
 import { getAllVinyl } from '../../services/vinylServices'
 import { FilterBar } from './FilterBar'
 
-import { VinylCard } from './vinylCard'
+import { VinylCard } from './vinylcard'
 import {motion} from 'framer-motion'
 export const AllVinyl = () => {
     const [allVinyl , setAllVinyl] = useState([])
