@@ -1,5 +1,24 @@
 .nav{
-    background-color: rgba(227, 135, 227, 0.211);
-    height: 3vw;
     text-align: center;
+    
 }
+.nav-link{
+    font-size: medium;
+    font-family: "Bodoni Moda SC", serif;
+    color: white;
+    text-decoration: none;
+
+}
+
+.nav-link:visited {
+    color:white;
+}
+.nav-link:hover{
+    text-decoration: none !important;
+    font-size: 1.2rem; 
+    transition: font-size 0.3s ease;
+    color: rgb(232, 191, 233);
+}
+.custom-dropdown-menu {
+    margin-left: -20px; /* Adjust this value to move the menu */
+  }

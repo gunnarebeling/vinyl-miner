@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="150" height="50" viewBox="0 0 300 100">
+  <!-- Vinyl Icon -->
+  <circle cx="50" cy="50" r="40" fill="white" />
+  <circle cx="50" cy="50" r="10" fill="white" />
+  <rect x="40" y="40" width="20" height="20" fill="black" transform="rotate(45 50 50)" />
+  
+  <!-- Text -->
+  <text x="100" y="55" font-family="sans-serif" font-size="28" fill="white" font-weight="bold">
+    VINYL MINERS
+  </text>
+</svg>

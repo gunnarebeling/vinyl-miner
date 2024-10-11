@@ -2,11 +2,14 @@ import { useState } from "react"
 import { useNavigate } from "react-router-dom"
 import "./Login.css"
 import { createUser, getUserByEmail } from "../../services/userService"
+import { UploadWidget } from "../photoupload/UploadWidget"
+import { ProfileImg } from "../photoupload/ProfileImg"
 
 export const Register = () => {
   const [user, setUser] = useState({
     email: "",
     fullName: "",
+    profileImage: ""
   })
   let navigate = useNavigate()
 
@@ -51,41 +54,63 @@ export const Register = () => {
 
   return (
     <main className="auth-container">
-      <form className="auth-form" onSubmit={handleRegister}>
+      <div className="text-center">
         <h1 className="header">Vynl Miner</h1>
         <h2>Please Register</h2>
-        <fieldset className="auth-fieldset">
-          <div>
-            <input
-              onChange={updateUser}
-              type="text"
-              id="fullName"
-              className="auth-form-input"
-              placeholder="Enter your name"
-              required
-              autoFocus
-            />
+      </div>
+        <div className="d-flex flex-wrap w-100 align-items-center justify-content-center  ">
+          <div className="text-center mt-2 me-3">
+            <ProfileImg profileImage={user.profileImage} navPic={false} />
+            <UploadWidget register={true} setUser={setUser} user={user}/>
           </div>
-        </fieldset>
-        <fieldset className="auth-fieldset">
-          <div>
-            <input
-              onChange={updateUser}
-              type="email"
-              id="email"
-              className="auth-form-input"
-              placeholder="Email address"
-              required
-            />
+        <form className="auth-form mt-2" >
+          <div className='mx-3 text-center'>
+            <fieldset className="auth-fieldset ">
+              <div>
+                <input
+                  onChange={updateUser}
+                  type="text"
+                  id="fullName"
+                  className="auth-form-input"
+                  placeholder="Enter your name"
+                  required
+                  autoFocus
+                />
+              </div>
+            </fieldset>
+            <fieldset className="auth-fieldset">
+              <div>
+                <input
+                  onChange={updateUser}
+                  type="email"
+                  id="email"
+                  className="auth-form-input"
+                  placeholder="Email address"
+                  required
+                />
+              </div>
+            </fieldset>
+            <fieldset className="auth-fieldset">
+              <div>
+                <input
+                  onChange={updateUser}
+                  type="password"
+                  id="password"
+                  className="auth-form-input"
+                  placeholder="password"
+                  required
+                />
+              </div>
+            </fieldset>
+            
           </div>
-        </fieldset>
-        
-        <fieldset className="auth-fieldset">
-          <div>
-            <button type="submit">Register</button>
-          </div>
-        </fieldset>
+          <fieldset className="auth-fieldset">
+          </fieldset>
       </form>
+        </div>
+          <div className="text-center mt-2">
+            <button onClick={handleRegister} type="submit">Register</button>
+          </div>
     </main>
   )
 }

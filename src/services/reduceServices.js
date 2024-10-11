@@ -7,6 +7,12 @@ export const formReducer = (state, action) => {
                 ...state,
                 [action.field]: action.value
             }
+        case 'spotifySearch' :
+            state = action.copy
+            return {
+                ...state
+            }
+            
         default:
             return state;
                 

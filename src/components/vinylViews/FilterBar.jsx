@@ -21,7 +21,11 @@ export const FilterBar = ({setFilteredVinyl, allVinyl}) => {
         setFilterValues(copy)
     }
     useEffect(() => {
+        console.log("allVinyl",allVinyl); 
         let filtercopy = [...allVinyl]
+        console.log("filterValues",filterValues);
+        console.log("filtercopy",filtercopy); 
+
         if (!filterValues.genre && !filterValues.text) {
            filtercopy = [...allVinyl] 
            
@@ -32,18 +36,22 @@ export const FilterBar = ({setFilteredVinyl, allVinyl}) => {
         if(filterValues.text){
             filtercopy = filtercopy.filter(vinyl => ((vinyl.albumName.toLowerCase().includes(filterValues.text.toLocaleLowerCase())) || vinyl.artist.toLowerCase().includes(filterValues.text.toLocaleLowerCase()) ))
         }
-        setFilteredVinyl(filtercopy.reverse())
+        const newFilteredVinyl= filtercopy.reverse();
+        console.log("newFilteredVinyl",newFilteredVinyl);
+        setFilteredVinyl(newFilteredVinyl); 
     // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [filterValues, allVinyl])
     return (
         <div>
-            <div className="d-flex justify-content-between py-2 px-4">
-                <div className="genre-dropdown">
-                <label name="genre-dropdown-label" className="m-2">genre:</label>
+            <div className="d-flex justify-content-between align-items-center py-2 px-4">
+                <div className="genre-dropdown d-flex">
+                <label  htmlFor="genre" name="genre-dropdown-label" className="m-2">genre:</label>
                     <select 
+                        id="genre"
                         name="genre"
                         onChange={handleGenreChange}
-                        value={filterValues.genre} >
+                        value={filterValues.genre}
+                        className="" >
                         <option value= '0'>all</option>
                         {genres.map(genre => {
                             return (

@@ -27,3 +27,9 @@ export const updateUser = (userobj) => {
     body: JSON.stringify(userobj)
   })
 }
+
+export const getALLUsers = () => {
+  return fetch(`http://localhost:8088/users`).then((res) =>
+    res.json()
+  )
+}

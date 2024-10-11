@@ -86,6 +86,7 @@ video {
   border: 0;
   font-size: 100%;
   font: inherit;
+  color: rgb(223, 223, 223);
   vertical-align: baseline;
 }
 /* HTML5 display-role reset for older browsers */
@@ -104,6 +105,9 @@ section {
 }
 body {
   line-height: 1;
+  background-color: var(--bs-dark);
+  color: var(--bs-light);
+
 }
 ol,
 ul {
@@ -124,8 +128,16 @@ table {
   border-collapse: collapse;
   border-spacing: 0;
 }
-body{
-  background-color: antiquewhite;
+:root {
+  --bs-primary: #E48DDD;
+  --bs-secondary: #767676;
+  --bs-dark: #302F2D;
+  --bs-light: #FFFDF8;
+  .btn-primary{
+    background-color: var(--bs-primary);
+  }
+ 
+  
 }
 
 
@@ -137,12 +149,12 @@ body{
 }
 
 .custom-link {
-  color: rgba(227, 135, 227, 0.713); /* Default link color */
+  /* color: rgba(227, 135, 227, 0.713); Default link color */
   cursor: pointer;
 }
 
 .custom-link:hover {
-  color: rgba(180, 108, 180, 0.704); /* Color on hover */
+  /* color: rgba(180, 108, 180, 0.704); Color on hover */
   text-decoration: underline;
 }
 
@@ -155,4 +167,68 @@ body{
 .custom-link:hover .hover-icon {
   display: inline-block;
 }
+.btn-info{
+  background-color:var(--bs-light);
+}
+.btn-primary{
 
+}
+input, select {
+  border-radius: 6px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  height: fit-content;
+}
+
+input:focus, select:focus {
+  border: 1px solid #a070ff; 
+  box-shadow: 0 0 8px #a070ff;
+}
+
+.form-group {
+  margin-bottom: 15px;
+}
+
+input, select {
+  height: 2rem;
+  width: 100%; 
+  box-sizing: border-box;
+}
+hr {
+  width: 90%;
+  margin: 0 auto;
+  margin-top: 20px;
+}
+header{
+  font-family: 'bodoni-moda-sc-title';
+}
+
+.profile-img{
+   width: 100px; 
+    height: 100px; 
+    border-radius: 50%;  
+    overflow: hidden 
+}
+
+.btn-outline-primary{
+  color: var(--bs-primary);
+  border-color: var(--bs-primary) ;
+}
+
+.btn-outline-primary:hover{
+  color: white;
+  border-color: var(--bs-primary) ;
+  background-color: var(--bs-primary);
+
+}
+.btn-spotify{
+  color: black;
+  background-color: #1ed760 ;
+}
+
+.btn-spotify:hover{
+  color: black;
+  border-color: #1ed760 ;
+  background-color: #1abc54;
+  ;
+
+}

@@ -2,8 +2,9 @@ import { useEffect, useState } from 'react'
 import './Vinyl.css'
 import { getAllVinyl } from '../../services/vinylServices'
 import { FilterBar } from './FilterBar'
-import { Vinyl } from './Vinyl'
 
+import { VinylCard } from './vinylcard'
+import {motion} from 'framer-motion'
 export const AllVinyl = () => {
     const [allVinyl , setAllVinyl] = useState([])
     const [filteredVinyl, setFilteredVinyl] = useState([])
@@ -21,19 +22,24 @@ export const AllVinyl = () => {
 
 
     return (
-        <>
-            <div className="header-container m-3">
+        <motion.div
+            initial={{opacity:0}}
+            animate={{opacity: 1}}
+            transition={{duration: .3}}>
+            <div className="header-container  m-3">
                 <header className="display-6 text-center bodoni-moda-sc-title">All Vinyl</header>
             </div>
             <FilterBar setFilteredVinyl={setFilteredVinyl} allVinyl={allVinyl}/>
-            <div className="vinyls-container row border mx-2">
+            <div className="vinyls-container justify-content-center row  mx-2">
+                
                 {filteredVinyl?.reverse().map(vinyl => (
-                    <Vinyl vinyl={vinyl} key={vinyl.id} generalView={true}/>    
+                    <VinylCard vinyl={vinyl} key={vinyl.id} generalView={true}/>    
                 ))}
+                </div>
 
-            </div>
+    
         
-        </>
+        </motion.div>
     ) 
     
 }
