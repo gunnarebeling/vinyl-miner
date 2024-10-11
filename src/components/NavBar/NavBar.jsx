@@ -5,24 +5,27 @@ import { getUserById } from "../../services/userService"
 import { ProfileImg } from "../photoupload/ProfileImg"
 import { UserContext } from "../../views/ApplicationViews"
 
-export const NavBar = ({currentUser}) => {
+export const NavBar = () => {
     const [profilePhoto , setProfilePhoto] = useState({})
-    const {photoSwap} = useContext(UserContext)
+    const {photoSwap, currentUser} = useContext(UserContext)
+    const navigate = useNavigate()
+
     useEffect(() => {
-        getUserById(currentUser).then(res => {
-            
+        getUserById(currentUser).then(res => {    
             setProfilePhoto(res[0])
         })
     }, [currentUser, photoSwap])
-    const navigate = useNavigate()
+
     return (
         <nav className="navbar nav navbar-dark nav border-bottom navbar-dark align-items-center ">
                 <a className="navbar-brand m-2" href="#">
-                    <img  src="./vinyl_miners_logo.svg"  alt="Logo" className="d-inline-block  text-center align-top" href="#"/>
-                </a>
-    
-
-                
+                    <img  
+                        src="./vinyl_miners_logo.svg"  
+                        alt="Logo" 
+                        className="d-inline-block  text-center align-top"
+                        href="#"
+                    />
+                </a>       
             <div className=" navbar justify-content-between">
                 <ul className="d-flex align-items-center mx-auto">
                     <li className="nav-item">
@@ -41,10 +44,9 @@ export const NavBar = ({currentUser}) => {
                                 role="button" 
                                 id="profile-dropdown"
                                 data-bs-toggle="dropdown"
-                                aria-expanded="false">
-                                
+                                aria-expanded="false"
+                            >
                                 <ProfileImg profileImage={profilePhoto?.profileImage} navPic={true}/>
-                                
                             </a>
                             <ul className="dropdown-menu dropdown-menu-end " aria-labelledby="dropdownMenuLink">
                                 <li>
@@ -54,7 +56,7 @@ export const NavBar = ({currentUser}) => {
                                     <Link className="dropdown-item" to={`/editprofile`}>Edit Profile</Link>
                                 </li>
                                 <li>
-                                    {localStorage.getItem("vinyl_user") ? (
+                                    {localStorage.getItem("vinyl_user") && 
                                         <section className="nav-item ms-auto ">
                                             <Link
                                             className="dropdown-item"
@@ -67,16 +69,12 @@ export const NavBar = ({currentUser}) => {
                                             Logout
                                             </Link>
                                         </section>
-                                        ) : (
-                                        ""
-                                        )}
+                                    }
                                 </li>
-
                             </ul>
                         </div> 
                     </li>
-                
-                    </ul>
+                </ul>
             </div>
         </nav>
     )

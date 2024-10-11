@@ -1,5 +1,5 @@
 /* eslint-disable react/no-unescaped-entities */
-import { useEffect, useState } from "react"
+import { useContext, useEffect, useState } from "react"
 import { useNavigate, useParams } from "react-router-dom"
 import { getALLUsers, getUserById } from "../../services/userService"
 import {motion} from 'framer-motion'
@@ -7,33 +7,33 @@ import { ProfileImg } from "../photoupload/ProfileImg"
 import { deleteFollow, getFollowersbyCurrentUser, getFollowsbyCurrentUser, postFollow } from "../../services/followServices"
 import { ProfileModal } from "./profileModal"
 import './profile.css'
+import { UserContext } from "../../views/ApplicationViews"
 
 
-export const Profile = ({currentUser}) => {
+export const Profile = () => {
     const [user, setUser] = useState({})
     const {userId} = useParams()
     const [followers, setFollowers] = useState([])
     const [following, setFollowing] = useState([])
-    const navigate = useNavigate()
     const [followingUsers , setFollowingUsers] = useState([])
     const [followerUsers , setFollowerUsers] = useState([])
     const [deleteTrigger, setDeleteTrigger] = useState(false)
     const [followed, setFollowed]=useState(false)
+    const {currentUser} = useContext(UserContext)
+    const navigate = useNavigate()
  
     useEffect(() => {
         getALLUsers().then(res => {
             let filteredFollowingUsers = []
             let filteredFollowerUsers = []
-             res.forEach(user => {
+            res.forEach(user => {
                 if (followers) {
                     setFollowed(followers.some(follow => follow.followingUserId === currentUser))
                     followers.forEach(follow => {
-
                         if (follow.followingUserId === user.id) {
                             filteredFollowerUsers.push(user)
                         }
-                    })
-                    
+                    })  
                 }
                 if (following) {
                     following.forEach(follow => {
@@ -45,7 +45,8 @@ export const Profile = ({currentUser}) => {
             })
             setFollowerUsers(filteredFollowerUsers)
             setFollowingUsers(filteredFollowingUsers)
-        })}, [followers, following])
+        })
+    }, [followers, following])
 
     useEffect(() => {
         getUserById(userId).then(obj => {
@@ -63,6 +64,7 @@ export const Profile = ({currentUser}) => {
             setFollowing(res)
         })
     } , [userId, deleteTrigger, followed])
+
     const handleViewCollection = (event) => {
         event.preventDefault()
         navigate(`/collection/${user.id}`)
@@ -70,7 +72,8 @@ export const Profile = ({currentUser}) => {
     }
 
     const handleFollow = () => {
-        const follow = followers.find(follow => follow.followedUserId === parseInt(userId) && follow.followingUserId === currentUser)
+        const follow = followers.find(follow => follow.followedUserId === parseInt(userId) && 
+        follow.followingUserId === currentUser)
         if (follow){
             deleteFollow(follow.id)
         }else{
@@ -102,7 +105,10 @@ export const Profile = ({currentUser}) => {
             
             
             <div className="header text-center  m-3">
-                {parseInt(userId) === currentUser ? <header className="bodoni-moda-sc-title">My Profile</header> : <header className="bodoni-moda-sc-title">{user?.fullName}'s Profile</header>}
+                {parseInt(userId) === currentUser ? 
+                    <header className="bodoni-moda-sc-title">My Profile</header> : 
+                    <header className="bodoni-moda-sc-title">{user?.fullName}'s Profile</header>
+                }
             </div>
             <div className="d-flex mt-5 justify-content-center mb-3">
                 <ProfileImg profileImage={user?.profileImage}/>
@@ -123,12 +129,7 @@ export const Profile = ({currentUser}) => {
                     <span>{user.vinyls?.length}</span>
                     <span><span className="stats-buttons">collection</span></span>
                 </div>
-                
-
-
-            <ProfileModal followers={followers} following={following} userId={userId} followingUsers={followingUsers} followerUsers={followerUsers} setDeleteTrigger={setDeleteTrigger}/>
-               
-                
+                <ProfileModal followers={followers} following={following} userId={userId} followingUsers={followingUsers} followerUsers={followerUsers} setDeleteTrigger={setDeleteTrigger}/>    
             </div>
             <div className="d-flex justify-content-center   mt-5 container align-items-center">
                 <div className="container d-flex flex-column align-items-center rounded  text-center  m-2 ">
@@ -138,38 +139,36 @@ export const Profile = ({currentUser}) => {
                             <h1 className="">{user.email}</h1>
                         </div>
                     }
-                    
                 </div>
             </div>
-                    <div className="m-3 text-center">
-                        {parseInt(userId) === currentUser? 
+            <div className="m-3 text-center">
+                {parseInt(userId) === currentUser? 
+                    <button 
+                        className="btn btn-outline-primary" 
+                        onClick={(event) => 
+                            {event.preventDefault()
+                            navigate('/editprofile')}}
+                    >edit profile
+                    </button> : 
+                    <div>
+                        <button 
+                            className="btn btn-outline-primary" 
+                            onClick={handleViewCollection}>view collection
+                        </button>
+                        <span className="ms-3">
                             <button 
-                                className="btn btn-outline-primary" 
-                                onClick={(event) => 
-                                    {event.preventDefault()
-                                    navigate('/editprofile')}}
-                            >edit profile</button> : 
-                            <div>
-                            <button 
-                                className="btn btn-outline-primary" 
-                                onClick={handleViewCollection}>view collection
+                                className={followed ? 
+                                "btn btn-primary" :
+                                "btn btn-outline-primary"} 
+                                onClick={handleFollow}>
+                                    {followed ? 
+                                    "unfollow" : 
+                                    "follow"}
                             </button>
-                            <span className="ms-3">
-                                <button 
-                                    className={followed ? 
-                                    "btn btn-primary" :
-                                    "btn btn-outline-primary"} 
-                                    onClick={handleFollow}>
-                                        {followed ? 
-                                        "unfollow" : 
-                                        "follow"}
-                                </button>
-                            </span> 
-                            </div>
-                                
-                        }
-                    </div>
-            
+                        </span> 
+                    </div>          
+                }
+            </div>    
         </motion.div>
     )
 }

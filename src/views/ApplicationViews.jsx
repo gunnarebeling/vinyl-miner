@@ -7,7 +7,6 @@ import { Profile } from "../components/profile/Profile"
 import { NewVinylForm } from "../components/Forms/NewVinylForm"
 import { EditProfile } from "../components/Forms/EditProfile"
 import { EditVinylForm } from "../components/Forms/EditVinylForm"
-import { VinylDetails } from "../components/vinylViews/VinylDetails"
 import { NewTrade } from "../components/Forms/NewTrade"
 import { TradesHomeView } from "../components/trades/tradesHomeview"
 
@@ -31,24 +30,16 @@ export const ApplicationViews = () => {
                     path="/"
                     element={
                         <>
-                            <NavBar currentUser={currentUser}/>
-                                
-                                <div>
-                                    <Outlet/>
-                                </div>
-                                
+                            <NavBar/>       
+                            <Outlet/>          
                         </>
                     }>
                         <Route index element={<AllVinyl/>}/>
-                        <Route path="/collection/:userId" element={<UsersVinyl currentUser={currentUser}/>}/>
-                        <Route path="/profile/:userId" element={<Profile currentUser={currentUser}/>}/>
+                        <Route path="/collection/:userId" element={<UsersVinyl/>}/>
+                        <Route path="/profile/:userId" element={<Profile/>}/>
                         <Route path="NewVinyl" element={<NewVinylForm currentUser={currentUser}/>}/>
                         <Route path="editprofile" element={<EditProfile currentUser={currentUser}/>}/>
-                        <Route path='details/:vinylId'>
-                            <Route index element={<VinylDetails/>}/>
-                            <Route path="edit" element={<EditVinylForm/>}/>
-
-                        </Route>
+                        <Route path="details/:vinylId/edit" element={<EditVinylForm/>}/>   
                         <Route path="/tradeform/:tradeInitVinylId" element={<NewTrade/>} />
                         <Route path="trades" element={<TradesHomeView/>}/>
 

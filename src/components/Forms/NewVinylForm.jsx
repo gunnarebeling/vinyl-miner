@@ -1,16 +1,18 @@
-import { useEffect, useState } from "react"
+import { useContext, useEffect, useState } from "react"
 import { getGenres } from "../../services/genreService"
 import { getConditions } from "../../services/conditionsservices"
 import { postVinyl } from "../../services/vinylServices"
 import { useNavigate } from "react-router-dom"
 import { searchAlbum } from "../../services/spotifyApi"
 import { VinylCard } from "../vinylViews/vinylcard"
+import { UserContext } from "../../views/ApplicationViews"
 
-export const NewVinylForm = ({currentUser}) => {
+export const NewVinylForm = () => {
     
     const [genres, setGenres] = useState([])
     const [conditions, setConditions] = useState([])
     const [formValues, setFormValues] = useState({albumName:"", artist: "", conditionId: 1, genreId: 1, albumArt: ""})
+    const {currentUser} = useContext(UserContext)
     const navigate = useNavigate()
     useEffect(() => {
         getConditions().then(res => {
@@ -18,9 +20,9 @@ export const NewVinylForm = ({currentUser}) => {
         })
         getGenres().then(res => {
             setGenres(res)
-        })
-        
+        })     
     }, [])
+
     const handelSubmit = (event) => {
         event.preventDefault()
         let copy = {...formValues}
@@ -31,13 +33,13 @@ export const NewVinylForm = ({currentUser}) => {
 
     const handleSpotifySearch =  async (event) => {
         event.preventDefault()
-       const spotifyResult = await searchAlbum(formValues.artist, formValues.albumName)
-       let copy = {...formValues}
-       copy.albumName = spotifyResult?.albumName
-       copy.artistName = spotifyResult?.artistName 
-       copy.albumArt = spotifyResult?.image
-       copy.audioSample = spotifyResult?.audioSample
-       setFormValues(copy)
+        const spotifyResult = await searchAlbum(formValues.artist, formValues.albumName)
+        let copy = {...formValues}
+        copy.albumName = spotifyResult?.albumName
+        copy.artistName = spotifyResult?.artistName 
+        copy.albumArt = spotifyResult?.image
+        copy.audioSample = spotifyResult?.audioSample
+        setFormValues(copy)
     }
     
     return (
