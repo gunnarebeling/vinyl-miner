@@ -6,11 +6,11 @@ import { UploadWidget } from "../photoupload/UploadWidget"
 import { ProfileImg } from "../photoupload/ProfileImg"
 import { UserContext } from "../../views/ApplicationViews"
 
-export const EditProfile = ({currentUser}) => {
+export const EditProfile = () => {
     const [userInfo, setUserInfo] = useState({})
     const [newInfo , dispatch] = useReducer(formReducer, {} ) 
+    const {setPhotoSwap, currentUser} = useContext(UserContext)
     const navigate = useNavigate()
-    const {setPhotoSwap} = useContext(UserContext)
 
     useEffect(() => {
         getUserById(currentUser).then(res => {
@@ -18,13 +18,13 @@ export const EditProfile = ({currentUser}) => {
             setUserInfo(userobj)
         })
     }, [currentUser])
+
     useEffect(() => {
         if(userInfo){
            dispatch({type: 'setNewInfo', payload: userInfo})
-
         }
-
     }, [userInfo])
+
     const handelSubmit = (event) => {
         event.preventDefault()
         let copy = {
@@ -35,12 +35,10 @@ export const EditProfile = ({currentUser}) => {
 
         }
         updateUser(copy).then(()=>{
-            setPhotoSwap(prev => !prev)
-            
+            setPhotoSwap(prev => !prev)     
         } 
          ).then(() => {
-            navigate(`/profile/${newInfo.id}`)
-            
+            navigate(`/profile/${newInfo.id}`)  
          })     
     }
     

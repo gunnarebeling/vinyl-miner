@@ -37,8 +37,8 @@ export const ApplicationViews = () => {
                         <Route index element={<AllVinyl/>}/>
                         <Route path="/collection/:userId" element={<UsersVinyl/>}/>
                         <Route path="/profile/:userId" element={<Profile/>}/>
-                        <Route path="NewVinyl" element={<NewVinylForm currentUser={currentUser}/>}/>
-                        <Route path="editprofile" element={<EditProfile currentUser={currentUser}/>}/>
+                        <Route path="NewVinyl" element={<NewVinylForm/>}/>
+                        <Route path="editprofile" element={<EditProfile/>}/>
                         <Route path="details/:vinylId/edit" element={<EditVinylForm/>}/>   
                         <Route path="/tradeform/:tradeInitVinylId" element={<NewTrade/>} />
                         <Route path="trades" element={<TradesHomeView/>}/>

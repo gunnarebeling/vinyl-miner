@@ -14,9 +14,7 @@ export const UploadWidget = ({dispatch,register, setUser, user}) => {
             cloudName: 'dt2kpy8ox',
             uploadPreset: 'hwivfpg6'
         }, (error,result) => {
-           
-            if (!error && result && result.event === "success") {
-                
+            if (!error && result && result.event === "success") { 
                 const uploadedImageUrl = result.info.public_id || 'emptyAvatar.png';
                 if (register) {
                   let copy = 
@@ -30,7 +28,6 @@ export const UploadWidget = ({dispatch,register, setUser, user}) => {
                     field: "profileImage",
                     value: uploadedImageUrl
                   });
-
                 }
               } else if (error) {
                 console.error("Upload error:", error);
@@ -38,9 +35,12 @@ export const UploadWidget = ({dispatch,register, setUser, user}) => {
             }
           );
         }, [dispatch, setUser, user , register]);
+        
     return (
-        <button className=" btn btn-outline-primary mt-3" onClick={() => widgetRef.current?.open()}>{register ? "upload profile pic" : "Change Profile Picture"}</button>
-
-
+        <button 
+          className=" btn btn-outline-primary mt-3" 
+          onClick={() => widgetRef.current?.open()}>{register ? 
+            "upload profile pic" : "Change Profile Picture"}
+        </button>
     )
 }

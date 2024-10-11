@@ -5,11 +5,10 @@ import { describe, expect, vi } from "vitest"
 import { getGenres } from "../../services/genreService"
 
 const mockedSetFilteredVinyl= vi.fn()
+
 vi.mock('../../services/genreService', () => ({
     getGenres: vi.fn(() => Promise.resolve([]))
 }));
-vi.mock
-
 
 describe('AddInput for search' ,() => {
     it('should render input for search element', async () => {
@@ -29,8 +28,7 @@ describe('AddInput for search' ,() => {
                 setFilteredVinyl={mockedSetFilteredVinyl}
                 allVinyl={[]}
                 />
-        )
-        
+        ) 
         const inputElement = screen.getByPlaceholderText(/search/i)
         act(() => {
             fireEvent.change(inputElement, {target: {value: 'pink floyd'} })
@@ -82,12 +80,10 @@ describe('change genre with dropdown', () => {
         ]
         const mockVinyl = [
             { id: 1, albumName: 'Rock Album 1', artist: 'Artist 1', genreId: 1 },
-            { id: 2, albumName: 'Jazz Album 1', artist: 'Artist 2', genreId: 2 }
-            
+            { id: 2, albumName: 'Jazz Album 1', artist: 'Artist 2', genreId: 2 }      
         ]
         getGenres.mockResolvedValueOnce( mockGenres)
 
-        console.log("mockVinyl",mockVinyl); 
         render(
             <FilterBar 
                 setFilteredVinyl={mockedSetFilteredVinyl}
@@ -104,7 +100,6 @@ describe('change genre with dropdown', () => {
             fireEvent.change(dropDownElement, {target: {value: '1'}})
         })
         act(() => {
-console.log("mockVinyl", [mockVinyl])
             expect(mockedSetFilteredVinyl).toBeCalledWith([mockVinyl[0]])
         })
     })

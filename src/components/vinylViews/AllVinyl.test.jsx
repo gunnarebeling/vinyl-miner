@@ -19,16 +19,14 @@ const mockVinyls = [
   
     it('renders All Vinyl title', () => {
       render(<AllVinyl />);
-      expect(screen.getByText(/All Vinyl/i)).toBeInTheDocument(); // Replace with actual expected text
+      expect(screen.getByText(/All Vinyl/i)).toBeInTheDocument();
     });
-  
-    
+ 
+    it('renders All Vinyl title', () => {
+      render(<AllVinyl />);
+      expect(screen.getByText(/All Vinyl/i)).toBeInTheDocument(); 
+    });
   });
-
-it('renders All Vinyl title', () => {
-  render(<AllVinyl />);
-  expect(screen.getByText(/All Vinyl/i)).toBeInTheDocument(); // Replace with actual expected text
-});
 
   
 
