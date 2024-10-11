@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react'
 import './Vinyl.css'
 import { getAllVinyl } from '../../services/vinylServices'
 import { FilterBar } from './FilterBar'
-import { Vinyl } from './Vinyl'
+
 import { VinylCard } from './vinylcard'
 import {motion} from 'framer-motion'
 export const AllVinyl = () => {

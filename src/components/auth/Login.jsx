@@ -5,13 +5,14 @@ import { getUserByEmail } from "../../services/userService"
 
 export const Login = () => {
   const [email, set] = useState("")
+  const [password, setPassword] = useState("")
   const navigate = useNavigate()
 
   const handleLogin = (e) => {
     e.preventDefault()
 
     return getUserByEmail(email).then((foundUsers) => {
-      if (foundUsers.length === 1) {
+      if (foundUsers.length === 1 && foundUsers[0].password === password) {
         const user = foundUsers[0]
         localStorage.setItem(
           "vinyl_user",
@@ -47,6 +48,20 @@ export const Login = () => {
             </div>
           </fieldset>
           <fieldset className="auth-fieldset">
+          <fieldset className="auth-fieldset">
+            <div>
+              <input
+                type="password"
+                value={password}
+                className="auth-form-input"
+                onChange={(evt) => setPassword(evt.target.value)}
+                placeholder="password"
+                required
+                autoFocus
+              />
+            </div>
+          </fieldset>
+          <fieldset className="auth-fieldset"></fieldset>
             <div>
               <button type="submit">Sign in</button>
             </div>

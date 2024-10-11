@@ -1,4 +1,4 @@
-import { Vinyl } from "../vinylViews/Vinyl"
+
 import { VinylCard } from "../vinylViews/vinylcard"
 import "./trades.css"
 

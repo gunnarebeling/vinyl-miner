@@ -15,11 +15,17 @@ As a vinyl collector myself I wanted to create a system that would make logging 
 NAVIGATE
 </br>
 
+**signing in and registering**
+</br>
+As a user I want to be able to sign in as a user or create a profile if I am new to the site.
+Given I am a new User I will click Not a member yet? and be navigated to the registry page then I can enter the necessary information to register
+
 **Viewing and interacting with new vinyl additions**
 </br>
 As a  user, I  want to view other users additions to their collection so that I can interact with them by liking and possibly trading with them.  
   the user should be able to view all new additions to any users collection.
  Given the current user is logged in when he is on the home page he then will  see  all the new additions .  Given the user wants to see the  details of any vinyl created  by any user. When the user clicks the vinyl element of said vinyl then they will be showen a display of details and options to interact with it.
+
 
 **Viewing profiles**
 </br>

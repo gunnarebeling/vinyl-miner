@@ -181,11 +181,11 @@ export const EditVinylForm = () => {
                                 
                         </select>
                     </fieldset>
+                </form>
+            </div>
                     <fieldset className="submit-button text-center">
                         <button className="btn btn-primary  m-3" onClick={handelSubmit}>Submit</button>
                     </fieldset>
-                </form>
-            </div>
         </div>
     )
 }

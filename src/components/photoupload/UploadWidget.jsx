@@ -39,7 +39,7 @@ export const UploadWidget = ({dispatch,register, setUser, user}) => {
     return (
         <button 
           className=" btn btn-outline-primary mt-3" 
-          onClick={() => widgetRef.current?.open()}>{register ? 
+          onClick={() =>  widgetRef.current?.open()}>{register ? 
             "upload profile pic" : "Change Profile Picture"}
         </button>
     )

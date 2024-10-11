@@ -54,16 +54,18 @@ export const Register = () => {
 
   return (
     <main className="auth-container">
-      <form className="auth-form" onSubmit={handleRegister}>
+      <div className="text-center">
         <h1 className="header">Vynl Miner</h1>
         <h2>Please Register</h2>
-        <div className="d-flex w-100 align-items-center justify-content-center ">
-          <fieldset className=" me-3">
+      </div>
+        <div className="d-flex flex-wrap w-100 align-items-center justify-content-center  ">
+          <div className="text-center mt-2 me-3">
             <ProfileImg profileImage={user.profileImage} navPic={false} />
             <UploadWidget register={true} setUser={setUser} user={user}/>
-          </fieldset>
+          </div>
+        <form className="auth-form mt-2" >
           <div className='mx-3 text-center'>
-            <fieldset className="auth-fieldset mb-3">
+            <fieldset className="auth-fieldset ">
               <div>
                 <input
                   onChange={updateUser}
@@ -88,15 +90,27 @@ export const Register = () => {
                 />
               </div>
             </fieldset>
+            <fieldset className="auth-fieldset">
+              <div>
+                <input
+                  onChange={updateUser}
+                  type="password"
+                  id="password"
+                  className="auth-form-input"
+                  placeholder="password"
+                  required
+                />
+              </div>
+            </fieldset>
             
           </div>
-        </div>
           <fieldset className="auth-fieldset">
-            <div>
-              <button type="submit">Register</button>
-            </div>
           </fieldset>
       </form>
+        </div>
+          <div className="text-center mt-2">
+            <button onClick={handleRegister} type="submit">Register</button>
+          </div>
     </main>
   )
 }
