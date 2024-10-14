@@ -25,3 +25,7 @@ export const postLike = (likeObj) =>{
 
     
 }
+export const deleteLike = (likeObj) => {
+    return fetch(`http://localhost:8088/likes/${likeObj.id}`,{
+        method: 'DELETE',})
+}

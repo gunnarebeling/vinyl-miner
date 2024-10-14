@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom"
 import { UserContext } from "../../views/ApplicationViews"
 import './VinylCard.css'
 import { deleteVinyl } from "../../services/vinylServices"
-import { getLikesByVinylId, postLike, UpdateLike } from "../../services/likesServices"
+import { deleteLike, getLikesByVinylId, postLike, UpdateLike } from "../../services/likesServices"
 import { OverlayTrigger, Popover, PopoverBody, PopoverHeader } from "react-bootstrap"
 import { VinylPopover } from "./VinylPopover"
 
@@ -48,6 +48,12 @@ export const VinylCard = ({vinyl, refreshOnClick}) => {
     const handleDelete = (e) => {
         e.preventDefault()
         deleteVinyl(vinyl.id).then(() => {
+            const deleteLikePromises = likes.map(like => {
+               return deleteLike(like)
+            })
+            return Promise.all(deleteLikePromises)
+        }).then(()=> {
+            
             navigate(`/collection/${currentUser}`)
             if (refreshOnClick) {
                 
@@ -55,13 +61,15 @@ export const VinylCard = ({vinyl, refreshOnClick}) => {
             }
             
         })
+
+        
     }
     const handleLike = (e) => {
         e.preventDefault()
         e.stopPropagation()
         const likeObj = likes.find(like => like.userId == currentUser)
         if (likeObj) {
-            UpdateLike(likeObj).then(()=> getAndSetLikes())
+            deleteLike(likeObj).then(()=> getAndSetLikes())
 
         }else{
             const obj = {
