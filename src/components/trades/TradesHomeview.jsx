@@ -11,12 +11,17 @@ export const TradesHomeView = () => {
     const {currentUser} = useContext(UserContext)
     const [allVinyl, setAllVinyl] = useState([])
     const [acceptTriggered, setAcceptTriggered] = useState(false)
+    const [tradeDeleted , setTradeDelete] = useState(false)
     const [tradePendingVinyl, setTradePendingVinyl] = useState([])
     const [tradeOfferVinyl, setTradeOfferVinyl] = useState([])
     const getAndSetTrades = () => {
         getAllTrades().then( res => {
             setAllTrades(res)
         })
+    }
+    const tradeDelete = async (duplicateTrades) => { 
+        const deletePromises = duplicateTrades.map(trade => deleteTrade(trade?.id))
+        await Promise.all(deletePromises).then(()=> setTradeDelete(prev => !prev))
     }
     useEffect(() => {
         getAndSetTrades()
@@ -27,6 +32,18 @@ export const TradesHomeView = () => {
             setAllVinyl(res)
         })
     }, [allTrades])
+    useEffect(() => {
+        const deletePromise =  allTrades.reduce((matchingUsers , trade) =>{
+             const initVinyl = allVinyl.find(vinyl => vinyl?.id === trade?.tradeInitVinylId)
+             const offerVinyl = allVinyl.find(vinyl => vinyl?.id === trade?.tradeOfferVinylId)
+             if (initVinyl?.userId === offerVinyl?.userId) {
+                matchingUsers.push(trade)
+             }
+             return matchingUsers
+         }, [])
+         tradeDelete(deletePromise)
+
+    }, [allVinyl])
     useEffect(() => {
         setTradeOfferVinyl([])
         setTradePendingVinyl([])
@@ -46,21 +63,16 @@ export const TradesHomeView = () => {
         })
         
 
-    }, [allVinyl, allTrades, currentUser])
+    }, [allVinyl, allTrades, currentUser, tradeDeleted])
     
-    const tradeDelete = async (duplicateTrades) => {
-        
-        
-        const deletePromises = duplicateTrades.map(trade => deleteTrade(trade?.id))
-
-        await Promise.all(deletePromises)
-    }
 
     const handleAcceptDelete = async (event) => {
         event.preventDefault()
         const findInitVinyl = allVinyl.find(vinyl => vinyl.id === parseInt(event.target.dataset.initid))
         const findOfferVinyl = allVinyl.find(vinyl => vinyl.id === parseInt(event.target.dataset.offerid))
-        const tradeMatchForAccepted = allTrades.filter(trade => ((trade.tradeInitVinylId || trade.tradeOfferVinylId) === findInitVinyl?.id) || ((trade.tradeOfferVinylId || trade.tradeInitVinylId )=== findOfferVinyl?.id))
+        const tradeMatchForAccepted = allTrades.filter(trade => 
+            ((trade.tradeInitVinylId || trade.tradeOfferVinylId) === findInitVinyl?.id) || 
+            ((trade.tradeOfferVinylId || trade.tradeInitVinylId )=== findOfferVinyl?.id))
         const tradeMatchForDelete = allTrades.find(trade => (trade.tradeInitVinylId  === findInitVinyl?.id) && (trade.tradeOfferVinylId === findOfferVinyl?.id))
         const InitSwitch = {
             id: findInitVinyl.id,
