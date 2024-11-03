@@ -1,3 +1,4 @@
+
 export const getConditions = () => {
-    return fetch('http://localhost:8088/conditions').then(res => res.json())
+    return fetch('https://vinyl-miner-api.onrender.com/conditions').then(res => res.json())
 }

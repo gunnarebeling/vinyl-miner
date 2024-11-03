@@ -1,11 +1,11 @@
 export const getUserByEmail = (email) => {
-  return fetch(`http://localhost:8088/users?email=${email}`).then((res) =>
+  return fetch(`https://vinyl-miner-api.onrender.com/users?email=${email}`).then((res) =>
     res.json()
   )
 }
 
 export const createUser = (user) => {
-  return fetch("http://localhost:8088/users", {
+  return fetch("https://vinyl-miner-api.onrender.com/users", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -15,11 +15,11 @@ export const createUser = (user) => {
 }
 
 export const getUserById = (userId) => {
-  return fetch(`http://localhost:8088/users?id=${userId}&_embed=vinyls`).then(res => res.json())
+  return fetch(`https://vinyl-miner-api.onrender.com/users?id=${userId}&_embed=vinyls`).then(res => res.json())
 }
 
 export const updateUser = (userobj) => {
-  return fetch(`http://localhost:8088/users/${userobj.id}`,{
+  return fetch(`https://vinyl-miner-api.onrender.com/users/${userobj.id}`,{
     method: 'PUT',
     headers:{
       "Content-Type": "application/json",
@@ -29,7 +29,7 @@ export const updateUser = (userobj) => {
 }
 
 export const getALLUsers = () => {
-  return fetch(`http://localhost:8088/users`).then((res) =>
+  return fetch(`https://vinyl-miner-api.onrender.com/users`).then((res) =>
     res.json()
   )
 }

@@ -1,5 +1,5 @@
 export const postTrade = (tradeObj) => {
-    return fetch(`http://localhost:8088/trades`, {
+    return fetch(`https://vinyl-miner-api.onrender.com/trades`, {
         method: 'POST',
         headers: {
             "Content-Type": "application/json"
@@ -9,10 +9,10 @@ export const postTrade = (tradeObj) => {
 }
 
 export const getAllTrades = () => {
-    return fetch(`http://localhost:8088/trades?_embed=vinyl`).then(res => res.json())
+    return fetch(`https://vinyl-miner-api.onrender.com/trades?_embed=vinyl`).then(res => res.json())
 }
 export const deleteTrade = (id) => {
-    return fetch(`http://localhost:8088/trades/${id}`,{
+    return fetch(`https://vinyl-miner-api.onrender.com/trades/${id}`,{
         method: 'DELETE'
     })
 }

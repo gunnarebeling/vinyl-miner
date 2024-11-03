@@ -7,7 +7,7 @@ import { resolve} from 'path';
 // https://vitejs.dev/config/
 export default defineConfig({
   plugins: [react()],
-  base: '/vinyl-miner/',
+  base: '/',
   test: {
     globals:true,
     environment: 'jsdom',

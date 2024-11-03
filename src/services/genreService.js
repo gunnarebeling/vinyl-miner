@@ -1,3 +1,3 @@
 export const getGenres = () => {
-    return fetch('http://localhost:8088/genres').then(res => res.json())
+    return fetch('https://vinyl-miner-api.onrender.com/genres').then(res => res.json())
 }
